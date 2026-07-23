@@ -45,10 +45,10 @@ minimal emotion-poster style imagery.
 
 Example prompts:
 
-- "用这个 skill 做一张关于周末的图"
-- "主题：橘子汽水，文案：夏天慢慢醒来"
-- "把这张照片做成安静情绪海报"
-- "批量生成 9 张，主题分别是：周末、看星星、失眠、橘子、风筝、梨、夏天、向内生长、海边"
+- "Use this skill to make an image about the weekend"
+- "Theme: orange soda, copy: summer slowly waking up"
+- "Turn this photo into a quiet emotion poster"
+- "Batch-generate 9 posters with the themes: weekend, stargazing, insomnia, orange, kite, pear, summer, growing inward, seaside"
 
 ## License
 
