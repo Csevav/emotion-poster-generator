@@ -1,11 +1,91 @@
 # Prompt Recipes
 
-Use these recipes to make output fast, varied, and closer to the target minimal zine emotion-poster language. Classify each theme first, then choose a recipe inside that category.
+Use these recipes to make output fast, varied, and closer to the target minimal zine emotion-poster language. Classify each theme first, then choose a visual substyle. The substyle is the main guardrail against flattening the whole account into one look.
+
+## Visual Substyles
+
+### Blue Signal
+
+- Categories: Mood, People, Still Object
+- Layout: `blue-dot-field`, `blue-brush-mask`, `star-orbit`, or `type-and-object`
+- Anchor: `blue-dot-constellation`, `blue-brush-obscuration`, `scattered-star-sign`, or blue broken type
+- Typography: `almost-textless`, `broken-english-fragments`, or `scattered-letters`
+- Texture: `soft-scan-noise`, `low-contrast-photocopy`, or `aged-paper-fibers`
+- Accent: `electric-blue` or `cobalt-blue`
+- Best for: 蓝点、一抹蓝色、留白、定义、呼吸、看星星、极夜、情绪感
+- Notes: Blue is the emotional signal. It can be dots, words, brush, mask, or cutout, but it must be visible at thumbnail size.
+
+### Photo Window
+
+- Categories: Mood, People, Still Object
+- Layout: `small-window-block`, `vertical-photo-strip`, `dual-photo-panel`, or `upper-right-note`
+- Anchor: `tiny-faded-photo`, `small-landscape-window`, `paper-clipping`, or `micro-contact-sheet`
+- Typography: `archive-microtext`, `edge-phrase`, or `date-weather-label`
+- Texture: `washed-photo-print`, `xerox-softness`, or `subtle-halftone`
+- Accent: `sky-blue`, `cobalt-blue`, `soft-green`, or `charcoal-black`
+- Best for: 海、云、日出、雪、麦田、背影、候鸟、爱的海洋、海的对话
+- Notes: Use one small photo window, a vertical strip, or two small panels. Never turn it into a full travel photo.
+
+### Fruit Specimen
+
+- Categories: Fruit
+- Layout: `fruit-cutaway-study`, `center-specimen`, or `small-window-block`
+- Anchor: `fruit-specimen`, `translucent-fruit-slice`, or `washed-paper-block`
+- Typography: `date-weather-label`, `specimen-label`, or `archive-microtext`
+- Texture: `aged-paper-fibers`, `soft-scan-noise`, or `washed-photo-print`
+- Accent: `tomato-red`, `apple-red`, `guava-pink`, `citrus-yellow`, `pale-yellow`, `warm-orange`, or `soft-green`
+- Best for: 苹果、番茄、梨、芭乐、柠檬、橘子、西瓜、果味汽水
+- Notes: The fruit should feel printed, cut, translucent, indexed, or studied, not photographed as food.
+
+### Person Obscured
+
+- Categories: People
+- Layout: `blue-brush-mask`, `quiet-silhouette`, `small-window-block`, or `paper-fragment-stack`
+- Anchor: `obscured-face-fragment`, `quiet-person-silhouette`, `partial-gesture-crop`, or `shadow-or-trace`
+- Typography: `archive-microtext`, `edge-phrase`, or `gray-ghost-text`
+- Texture: `low-contrast-photocopy`, `washed-photo-print`, or `aged-paper-fibers`
+- Accent: `electric-blue`, `cobalt-blue`, `tomato-red`, or `charcoal-black`
+- Best for: 定义、自我、目光、女人、童年、愿她自由、允许脆弱、别怕变老
+- Notes: Avoid a conventional portrait. Obscure, crop, shrink, or translate the person into a trace.
+
+### Text Field
+
+- Categories: Mood, People
+- Layout: `type-as-object`, `ghost-text-page`, `type-and-object`, or `blue-dot-field`
+- Anchor: `ghost-body-text`, `abstract-texture-window`, or broken type
+- Typography: `large-quiet-type`, `body-copy-texture`, `broken-english-fragments`, or `gray-ghost-text`
+- Texture: `xerox-softness`, `risograph-grain`, or `light-ink-bleed`
+- Accent: `electric-blue`, `charcoal-black`, `pale-cyan`, or one tiny `tomato-red` mark
+- Best for: 灰、心态、疗愈、从容、慢一点、无所谓、交换一张排版可以吗
+- Notes: Text becomes the image. Use large type only as experimental editorial matter, not as a commercial headline.
+
+### Object Archive
+
+- Categories: Still Object
+- Layout: `center-specimen`, `thin-diagram`, `paper-fragment-stack`, or `upper-right-note`
+- Anchor: `daily-object-specimen`, `thin-branch-diagram`, `paper-clipping`, or `abstract-texture-window`
+- Typography: `specimen-label`, `date-weather-label`, or `broken-english-fragments`
+- Texture: `faint-pencil-annotation`, `light-ink-bleed`, `subtle-halftone`, or `aged-paper-fibers`
+- Accent: `electric-blue`, `sky-blue`, `tomato-red`, `pale-yellow`, `soft-green`, or `charcoal-black`
+- Best for: 风筝、时钟、瓷器、灯笼、海螺、咖啡、锥桶、树枝、花
+- Notes: One object becomes an archive specimen. Avoid tabletop, lifestyle, product, or cozy scene logic.
+
+### Editorial Page
+
+- Categories: Mood, People, Still Object
+- Layout: `ghost-text-page`, `type-as-object`, `dual-photo-panel`, or `paper-fragment-stack`
+- Anchor: `ghost-body-text`, `small-landscape-window`, `tiny-faded-photo`, or `shadow-or-trace`
+- Typography: `body-copy-texture`, `large-quiet-type`, `archive-microtext`, or `gray-ghost-text`
+- Texture: `low-contrast-photocopy`, `xerox-softness`, or `aged-paper-fibers`
+- Accent: `charcoal-black`, `electric-blue`, or `pale-cyan`
+- Best for: hi 我是叶麦、灰、疗愈、长文情绪、装订感、杂志页感
+- Notes: This is the controlled exception for larger text or longer body copy. Keep it editorial and quiet, not promotional.
 
 ## Fruit
 
 ### Translucent Fruit Slice
 
+- Substyle: `fruit-specimen`
 - Layout: `fruit-cutaway-study`
 - Anchor: `translucent-fruit-slice`
 - Typography: `date-weather-label`
@@ -16,6 +96,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Single Fruit Specimen
 
+- Substyle: `fruit-specimen`
 - Layout: `center-specimen`
 - Anchor: `fruit-specimen`
 - Typography: `specimen-label`
@@ -26,6 +107,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Fruit Plus Paper Block
 
+- Substyle: `fruit-specimen` or `photo-window`
 - Layout: `small-window-block`
 - Anchor: `washed-paper-block`
 - Typography: `archive-microtext`
@@ -38,6 +120,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Blue Dot Field
 
+- Substyle: `blue-signal`
 - Layout: `blue-dot-field`
 - Anchor: `blue-dot-constellation`
 - Typography: `almost-textless`
@@ -48,6 +131,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Sparse Star Mood
 
+- Substyle: `blue-signal`
 - Layout: `star-orbit`
 - Anchor: `scattered-star-sign`
 - Typography: `broken-english-fragments`
@@ -58,6 +142,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Ghost Text Window
 
+- Substyle: `text-field`
 - Layout: `type-and-object`
 - Anchor: `abstract-texture-window`
 - Typography: `gray-ghost-text`
@@ -68,8 +153,20 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ## People
 
+### Blue Brush Obscured Portrait
+
+- Substyle: `person-obscured`
+- Layout: `blue-brush-mask`
+- Anchor: `obscured-face-fragment`
+- Typography: `archive-microtext`
+- Texture: `low-contrast-photocopy`
+- Accent: `electric-blue` or `cobalt-blue`
+- Best for: 定义、自我、目光、取悦、允许脆弱
+- Notes: Use a small grayscale bust, face crop, or ID-photo fragment partly covered by one saturated blue brush or paper strip.
+
 ### Quiet Silhouette
 
+- Substyle: `person-obscured`
 - Layout: `quiet-silhouette`
 - Anchor: `quiet-person-silhouette`
 - Typography: `archive-microtext`
@@ -80,6 +177,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Gesture Fragment
 
+- Substyle: `person-obscured`
 - Layout: `upper-right-note`
 - Anchor: `partial-gesture-crop`
 - Typography: `edge-phrase`
@@ -90,6 +188,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Person As Trace
 
+- Substyle: `person-obscured` or `photo-window`
 - Layout: `paper-fragment-stack`
 - Anchor: `shadow-or-trace`
 - Typography: `date-weather-label`
@@ -102,6 +201,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Thin Branch Diagram
 
+- Substyle: `object-archive`
 - Layout: `thin-diagram`
 - Anchor: `thin-branch-diagram`
 - Typography: `broken-english-fragments`
@@ -112,6 +212,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Tiny Object Label
 
+- Substyle: `object-archive`
 - Layout: `center-specimen`
 - Anchor: `daily-object-specimen`
 - Typography: `specimen-label`
@@ -122,6 +223,7 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 
 ### Small Photo Window
 
+- Substyle: `photo-window`
 - Layout: `small-window-block`
 - Anchor: `small-landscape-window`
 - Typography: `archive-microtext`
@@ -135,18 +237,20 @@ Use these recipes to make output fast, varied, and closer to the target minimal 
 For a mixed 9-image batch:
 
 1. Classify every row as Fruit, Mood, People, or Still Object.
-2. Use no more than 3 paper tones across the batch.
-3. Use no more than 5 accent hues across the batch.
-4. Rotate layouts so adjacent images do not share the same composition.
-5. Keep type scale, paper texture, and negative-space discipline consistent.
-6. Prefer `electric-blue`, `tomato-red`, `sky-blue`, `pale-yellow`, and `soft-green` as the recurring accent system.
+2. Choose a visual substyle for every row and record it.
+3. Use at least 4 substyles in a 9-image mixed batch unless the user asks for a narrow series.
+4. Use no more than 3 paper tones across the batch.
+5. Use no more than 5 accent hues across the batch.
+6. Rotate layouts so adjacent images do not share the same composition.
+7. Keep type scale, paper texture, and negative-space discipline consistent.
+8. Prefer `electric-blue`, `tomato-red`, `sky-blue`, `pale-yellow`, and `soft-green` as the recurring accent system.
 
 ## Prompt Skeleton
 
 ```text
-Tall vertical 3:5 minimal zine emotion poster on [paper tone] aged matte paper, with [empty-space]% quiet empty space. A small [layout position] cluster occupies about [cluster-size]% of the canvas, leaving the paper surface dominant.
+Tall vertical 3:5 minimal zine emotion poster on [paper tone] aged matte paper, using the [visual substyle] substyle, with [empty-space]% quiet empty space. A small [layout position] cluster or text event occupies about [cluster-size]% of the canvas, leaving the paper surface dominant.
 
-The theme "[theme]" is translated into [category-specific anchor]. Use [anchor treatment] so it feels like a tiny scanned specimen, paper clipping, low-fidelity print, or abstract sign rather than a full scene.
+The theme "[theme]" is classified as [category] and translated into [category-specific anchor]. Use [anchor treatment] so it feels like a tiny scanned specimen, paper clipping, low-fidelity print, obscured trace, text field, or abstract sign rather than a full scene.
 
 Use tiny [typography style] text reading "[copy]", placed [text position], with optional microtext such as [date/weather/index/broken words]. Add one [accent color] accent as [accent form], visible at thumbnail size but restrained on the page, with [texture details].
 

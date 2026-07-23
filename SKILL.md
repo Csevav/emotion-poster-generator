@@ -7,7 +7,7 @@ description: Generate one or many quiet minimal zine emotion posters from themes
 
 Turn the user's prompt into generated raster images plus traceable prompts.
 
-This skill supports both single-image and batch production. Choose the mode and visual category from the user's prompt rather than asking the user to pick a separate skill.
+This skill supports both single-image and batch production. Choose the mode, content category, and visual substyle from the user's prompt rather than asking the user to pick a separate skill.
 
 The target image language is a quiet minimal zine emotion poster: tall aged paper, a very small visual event, precise micro typography, and one memorable accent color. Preserve the essence of sparse emotion-poster work without copying any creator's exact layout, title format, signature, watermark, recurring proprietary marks, or existing image.
 
@@ -82,6 +82,53 @@ Use these category-specific visual grammars before selecting the final recipe.
 - Pair the object with micro annotations, small English fragments, date/weather, a tiny index number, or measurement-like type.
 - Avoid product ads, realistic tabletop photography, cozy lifestyle scenes, dense collage, large shadows, and obvious mockups.
 
+## Visual Substyle Routing
+
+After category routing, choose one visual substyle. The substyle controls the image grammar; the content category controls what the subject becomes.
+
+- `blue-signal`: saturated blue dots, blue words, blue brush/cutout marks, or blue fragments carry the emotion.
+- `photo-window`: one small photo, two stacked photo panels, or a narrow vertical strip of tiny images floats on paper.
+- `fruit-specimen`: fruit is treated as a cutaway, translucent slice, old printed specimen, or small color study.
+- `person-obscured`: people appear as a tiny back view, cropped gesture, shadow, ID-photo fragment, or obscured face.
+- `text-field`: typography is the main visual event; image may be absent or secondary.
+- `object-archive`: a non-fruit object becomes a scanned specimen with labels, measurement text, or diagram marks.
+- `editorial-page`: a more magazine-like composition with larger text, long ghost text, binder/page feeling, or layered text blocks.
+
+Substyle selection rules:
+
+- Fruit usually starts with `fruit-specimen`; use `photo-window` only when a fruit is paired with sky, field, season, or memory.
+- Mood can use `blue-signal`, `text-field`, `photo-window`, or `editorial-page`.
+- People usually use `person-obscured`; use `photo-window` for memory/back-view scenes and `text-field` for identity/self-definition prompts.
+- Still Object usually uses `object-archive`; use `blue-signal` for shells, dots, stars, or abstract object fields; use `photo-window` for sea, sky, snow, and landscape fragments.
+- For a batch, rotate substyles. Do not let every image become the same tiny photo window or blue-dot field.
+
+## First-Principles Prompt Fields
+
+Every final prompt must answer these rendering questions in order. Use the answers as concrete visual constraints, not as analysis prose.
+
+1. Canvas: tall 3:5 paper poster, full-frame aged paper, no border or mockup.
+2. Attention Geometry: 70%-90% empty paper, one cluster or text event around 8%-24% of the canvas, no edge-hugging unless the chosen substyle requires drifting text.
+3. Content Category: Fruit, Mood, People, or Still Object.
+4. Visual Substyle: one of `blue-signal`, `photo-window`, `fruit-specimen`, `person-obscured`, `text-field`, `object-archive`, or `editorial-page`.
+5. Image Anchor: one object, photo crop, silhouette, color block, text field, trace, or specimen.
+6. Anchor Treatment: scanned paper, old photo, photocopy, halftone, risograph ink, torn edge, soft edge, misregistration, line diagram, or low-contrast print.
+7. Typography System: tiny serif/typewriter/monospaced text, fragmented English/Chinese, date/weather/place, label text, or ghost body copy.
+8. Color Logic: one high-recognition color anchor visible at thumbnail size, with the rest subdued.
+9. Emotional Temperature: quiet, distant, private, poetic, archival, sparse, restrained.
+10. Hard Avoids: no full scene, ad, large commercial headline, sticker collage, fashion/beauty portrait, 3D, neon, glossy mockup, or generic template polish.
+
+## Color Engine
+
+Use one main high-recognition color per image.
+
+- Default to a visible opaque or saturated color anchor: electric blue, cobalt blue, sky blue, tomato red, apple red, guava pink, citrus yellow, pale yellow, soft green, or warm orange.
+- Keep paper, grayscale photos, microtext, and secondary marks subdued.
+- The color anchor should occupy about 0.8%-3% of the whole canvas or 15%-40% of the visual cluster.
+- Color can be the subject itself, a brush/cutout mark, a printed block, blue dots, broken type, a photo tint, or a small flat silhouette.
+- Do not weaken the main color with wording like `muted`, `faded`, `pastel`, `low saturation`, or `near-monochrome` unless the user explicitly asks for muted output.
+- Use `charcoal-black` as an accent only when the poster depends on black-and-white archive/photo logic; otherwise choose a chromatic accent.
+- For batches, at least half the outputs should have a clearly visible chromatic anchor, not only gray photos and tiny black text.
+
 ## Input Contract
 
 For batch work, accept CSV rows, Markdown tables, numbered lists, plain lists of themes, or a folder of reference images plus a short brief.
@@ -123,18 +170,18 @@ Paragraph 1: canvas and composition
 
 Paragraph 2: subject and image anchor
 
-- Convert the theme into one imageable anchor based on its category grammar.
+- Convert the theme into one imageable anchor based on its category grammar and visual substyle.
 - The anchor must be readable at thumbnail size but still physically small on the page.
-- Good anchors: fruit cutaway, plant branch, star field, blue-dot constellation, small photo crop, torn paper block, thin diagram, daily object, tiny silhouette, shadow, window, landscape scrap, or abstract emotional symbol.
+- Good anchors: fruit cutaway, plant branch, star field, blue-dot constellation, blue brush mask, small photo crop, torn paper block, thin diagram, daily object, tiny silhouette, obscured face, shadow, window, landscape scrap, ghost text block, or abstract emotional symbol.
 - If a photo is supplied, treat it as a small paper clipping, contact sheet, washed photo panel, or cropped fragment inside the layout.
 - Prefer one clear metaphor over a complete illustrated scene.
 
 Paragraph 3: typography, accent, and print behavior
 
 - Use tiny serif, monospaced, typewriter, or delicate editorial caption text.
-- Use one short readable phrase in Chinese or English, plus optional microtext that can be partly unreadable.
-- Optional microtext: date, weather, place, material label, index number, tiny archive note, measurement, or short broken English words.
-- Use one restrained but visible accent color; it should carry the poster's memory at thumbnail size.
+- Use one short readable phrase in Chinese or English, plus optional microtext that can be partly unreadable. In `text-field` and `editorial-page`, typography may become the main visual event.
+- Optional microtext: date, weather, place, material label, index number, tiny archive note, measurement, broken English words, scattered letters, or a low-contrast body-text field.
+- Use one restrained but visible accent color from the Color Engine; it should carry the poster's memory at thumbnail size.
 - Add paper fibers, scan noise, faint pencil marks, risograph grain, light ink bleed, xerox softness, washed print, or halftone degradation.
 
 Paragraph 4: mood and negative constraints
@@ -156,17 +203,23 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `paper-fragment-stack`: two or three overlapping scraps
 - `type-and-object`: short phrase and one small object form the cluster
 - `blue-dot-field`: saturated blue dots placed sparsely across quiet paper
+- `blue-brush-mask`: one saturated blue brush or paper strip obscures a face, word, or small image
 - `star-orbit`: stars, dots, or scattered letters loosely orbit a small anchor
 - `fruit-cutaway-study`: fruit slice or cutaway as a tiny specimen
 - `thin-diagram`: fine annotation lines around one object
 - `small-window-block`: one small rectangular photo/color block with micro labels
+- `vertical-photo-strip`: two or three tiny photo windows stacked vertically
+- `dual-photo-panel`: two adjacent or stacked photo panels with a narrow gap
 - `quiet-silhouette`: tiny person, shadow, gesture, or partial figure in empty paper
+- `ghost-text-page`: faint large text field or body-copy block becomes background texture
+- `type-as-object`: larger experimental text acts as the main anchor
 
 ### Anchor
 
 - `fruit-specimen`
 - `translucent-fruit-slice`
 - `blue-dot-constellation`
+- `blue-brush-obscuration`
 - `scattered-star-sign`
 - `thin-branch-diagram`
 - `tiny-faded-photo`
@@ -176,7 +229,9 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `daily-object-specimen`
 - `quiet-person-silhouette`
 - `partial-gesture-crop`
+- `obscured-face-fragment`
 - `shadow-or-trace`
+- `ghost-body-text`
 - `abstract-texture-window`
 - `micro-contact-sheet`
 
@@ -190,6 +245,8 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `scattered-letters`
 - `vertical-note`
 - `gray-ghost-text`
+- `large-quiet-type`
+- `body-copy-texture`
 - `almost-textless`
 - `specimen-label`
 - `small-title-plus-index`
@@ -245,14 +302,14 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 ## Workflow
 
 1. Parse the user's content.
-   - Identify mode, category, central subject, mood, exact text if supplied, visual metaphor, and whether reference images are used.
+   - Identify mode, category, visual substyle, central subject, mood, exact text if supplied, visual metaphor, and whether reference images are used.
    - For a complex idea, reduce it to one imageable metaphor.
    - If no image text is supplied, invent one short poetic phrase in the user's language.
 
 2. Select a variation recipe.
    - Pick a category-specific recipe from `prompt-recipes.md` when useful.
-   - Pick layout, anchor, typography, texture, mood, and accent.
-   - For batches, avoid repeating the same layout unless the user asks for strict series consistency.
+   - Pick substyle, layout, anchor, typography, texture, mood, and accent.
+   - For batches, avoid repeating the same substyle or layout unless the user asks for strict series consistency.
    - If the composition becomes dense, remove objects before reducing empty space.
 
 3. Compile one final image prompt per output.
@@ -282,11 +339,13 @@ For a series, keep these consistent:
 - overall negative-space discipline
 - image treatment family
 - one visual category per row, recorded in the output index
+- one visual substyle per row, recorded in the output index
 
 Vary these across images:
 
 - layout position
 - anchor metaphor
+- visual substyle
 - accent hue
 - typography behavior
 - texture mode
@@ -302,8 +361,10 @@ Before returning, check every generated image:
 - Is there only one main visual anchor?
 - Is the anchor small but still recognizable at thumbnail size?
 - Does the category grammar match the theme?
+- Does the visual substyle match the category and avoid repeating recent outputs?
 - Is typography micro, delicate, and editorial rather than a large headline?
 - Is there one restrained high-recognition accent color?
+- Is the color anchor visible at thumbnail size, with enough area to read?
 - Does the image feel scanned, printed, aged, or low-fidelity instead of digitally clean?
 - Does it avoid copying a specific creator's signature, watermark, title format, or existing image?
 - Does it avoid full-bleed illustration, dense scrapbook, glossy ad, 3D, neon, anime, cute stickers, motivational quote cards, commercial cover design, and stock-photo realism?
@@ -329,7 +390,8 @@ For one image:
 
 - Mode: [Single / Photo / Text]
 - Category: [Fruit / Mood / People / Still Object]
-- Recipe: [layout / anchor / typography / accent / texture / mood]
+- Substyle: [blue-signal / photo-window / fruit-specimen / person-obscured / text-field / object-archive / editorial-page]
+- Recipe: [substyle / layout / anchor / typography / accent / texture / mood]
 - [one short note about how the user's input was interpreted]
 ````
 
@@ -338,9 +400,9 @@ For batch output, return a compact index first, then image sections:
 ````markdown
 # Batch Run: [run name]
 
-| ID | Category | Theme | Output | Recipe | Review |
-| --- | --- | --- | --- | --- | --- |
-| 001 | Fruit | 橘子汽水 | 001-orange-soda.png | fruit-cutaway-study / translucent-fruit-slice / tiny-caption / warm-orange / aged-paper-fibers / summer | pass |
+| ID | Category | Substyle | Theme | Output | Recipe | Review |
+| --- | --- | --- | --- | --- | --- | --- |
+| 001 | Fruit | fruit-specimen | 橘子汽水 | 001-orange-soda.png | fruit-specimen / fruit-cutaway-study / translucent-fruit-slice / tiny-caption / warm-orange / aged-paper-fibers / summer | pass |
 
 ## 001 - 橘子汽水
 
