@@ -26,6 +26,12 @@ skill:
 Batch requests (a list, table, or CSV of themes) produce a full run with an
 index table and one section per generated poster.
 
+## Examples
+
+| Lemon | Rainy Day |
+| --- | --- |
+| ![Lemon](examples/lemon.png) | ![Rainy Day](examples/rainy-day.png) |
+
 ## Repo contents
 
 | File | Purpose |
