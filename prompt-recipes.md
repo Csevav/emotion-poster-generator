@@ -248,11 +248,11 @@ For a mixed 9-image batch:
 ## Prompt Skeleton
 
 ```text
-Tall vertical 3:5 minimal zine emotion poster on [paper tone] aged matte paper, using the [visual substyle] substyle, with [empty-space]% quiet empty space. A small [layout position] cluster or text event occupies about [cluster-size]% of the canvas, leaving the paper surface dominant.
+Tall vertical 3:5 high-resolution minimal zine emotion poster on [paper tone] aged matte paper, using the [visual substyle] substyle, with [empty-space]% quiet empty space. A small [layout position] cluster or text event occupies about [cluster-size]% of the canvas, leaving the paper surface dominant.
 
 The theme "[theme]" is classified as [category] and translated into [category-specific anchor]. Use [anchor treatment] so it feels like a tiny scanned specimen, paper clipping, low-fidelity print, obscured trace, text field, or abstract sign rather than a full scene.
 
-Use tiny [typography style] text reading "[copy]", placed [text position], with optional microtext such as [date/weather/index/broken words]. Add one [accent color] accent as [accent form], visible at thumbnail size but restrained on the page, with [texture details].
+Use tiny [typography style] text reading "[copy]", placed [text position], with optional microtext such as [date/weather/index/broken words]. Add one [accent color] accent as [accent form], visible at thumbnail size but restrained on the page, with [texture details]. Keep the main anchor edges, photo-window borders, fruit/object contours, and primary short text crisp; paper defects should not blur the subject.
 
-Flat orthographic scanned-paper mood, quiet, private, poetic, airy, low-fidelity editorial print. Avoid full-bleed scene, commercial headline, logo, CTA, glossy mockup, hard shadow, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, motivational quote card, and stock-photo realism.
+Flat orthographic scanned-paper mood, quiet, private, poetic, airy, low-fidelity editorial print with high-resolution source clarity. Avoid full-bleed scene, commercial headline, logo, CTA, glossy mockup, hard shadow, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, motivational quote card, stock-photo realism, blurry output, pixelation, and heavy degradation.
 ```

@@ -114,8 +114,9 @@ Every final prompt must answer these rendering questions in order. Use the answe
 6. Anchor Treatment: scanned paper, old photo, photocopy, halftone, risograph ink, torn edge, soft edge, misregistration, line diagram, or low-contrast print.
 7. Typography System: tiny serif/typewriter/monospaced text, fragmented English/Chinese, date/weather/place, label text, or ghost body copy.
 8. Color Logic: one high-recognition color anchor visible at thumbnail size, with the rest subdued.
-9. Emotional Temperature: quiet, distant, private, poetic, archival, sparse, restrained.
-10. Hard Avoids: no full scene, ad, large commercial headline, sticker collage, fashion/beauty portrait, 3D, neon, glossy mockup, or generic template polish.
+9. Resolution and Clarity: high-resolution source, crisp anchor edges, readable main short text, and texture applied as print character rather than blur.
+10. Emotional Temperature: quiet, distant, private, poetic, archival, sparse, restrained.
+11. Hard Avoids: no full scene, ad, large commercial headline, sticker collage, fashion/beauty portrait, 3D, neon, glossy mockup, or generic template polish.
 
 ## Color Engine
 
@@ -128,6 +129,17 @@ Use one main high-recognition color per image.
 - Do not weaken the main color with wording like `muted`, `faded`, `pastel`, `low saturation`, or `near-monochrome` unless the user explicitly asks for muted output.
 - Use `charcoal-black` as an accent only when the poster depends on black-and-white archive/photo logic; otherwise choose a chromatic accent.
 - For batches, at least half the outputs should have a clearly visible chromatic anchor, not only gray photos and tiny black text.
+
+## Resolution and Clarity
+
+Low-fidelity print style must not mean low-resolution output.
+
+- Prompt for a high-resolution vertical poster source suitable for sharp mobile viewing and later 2x export.
+- Keep the paper texture, scan noise, halftone, xerox wear, and ink bleed subtle enough that they do not blur the main anchor.
+- Main short text, date labels, specimen labels, and primary micro typography should have crisp letterforms. Secondary ghost text may be semi-legible.
+- Fruit pulp lines, photo-window edges, silhouettes, blue dots, color blocks, branch diagrams, and object contours should remain clean and defined.
+- Avoid wording such as `blurry`, `out of focus`, `soft overall image`, `low resolution`, `pixelated`, or `heavy degradation` unless the user explicitly asks for that defect.
+- If the built-in generator returns a small image, report the actual pixel size. For project-bound use, create or request a higher-resolution version rather than treating a small preview as final.
 
 ## Input Contract
 
@@ -183,6 +195,7 @@ Paragraph 3: typography, accent, and print behavior
 - Optional microtext: date, weather, place, material label, index number, tiny archive note, measurement, broken English words, scattered letters, or a low-contrast body-text field.
 - Use one restrained but visible accent color from the Color Engine; it should carry the poster's memory at thumbnail size.
 - Add paper fibers, scan noise, faint pencil marks, risograph grain, light ink bleed, xerox softness, washed print, or halftone degradation.
+- Keep the main anchor edges and primary short text crisp; paper defects should stay in the surface, not smear the subject.
 
 Paragraph 4: mood and negative constraints
 
@@ -365,6 +378,7 @@ Before returning, check every generated image:
 - Is typography micro, delicate, and editorial rather than a large headline?
 - Is there one restrained high-recognition accent color?
 - Is the color anchor visible at thumbnail size, with enough area to read?
+- Are the main anchor, photo-window edge, fruit/object contour, and primary short text crisp enough for mobile viewing?
 - Does the image feel scanned, printed, aged, or low-fidelity instead of digitally clean?
 - Does it avoid copying a specific creator's signature, watermark, title format, or existing image?
 - Does it avoid full-bleed illustration, dense scrapbook, glossy ad, 3D, neon, anime, cute stickers, motivational quote cards, commercial cover design, and stock-photo realism?
