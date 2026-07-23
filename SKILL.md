@@ -1,245 +1,253 @@
 ---
 name: emotion-poster-generator
-description: Generate one or many quiet minimal zine emotion posters from themes, photos, short copy, diary notes, fruits, moods, people, still objects, lists, tables, or batch briefs. Use when the user wants sparse vertical paper posters with huge negative space, one small symbolic anchor, micro typography, scanned-paper texture, and one restrained high-recognition accent color.
+description: 根据主题、照片、简短文案、日记片段、水果、情绪、人物、静物、清单、表格或批量简报，生成一张或多张安静克制的 zine 风情绪海报。当用户想要留白极大的竖版纸质海报——画面里只有一个极小的象征性视觉锚点、精细的微型排版、扫描纸质纹理，以及一个克制但高辨识度的强调色——时使用本 skill。
 version: 1.0.0
 tags: [image-generation, poster-design, prompt-engineering, batch-generation, zine-aesthetic]
 ---
 
-# Emotion Poster Generator
+# 情绪海报生成器 (Emotion Poster Generator)
 
-Turn the user's prompt into generated raster images plus traceable prompts.
+把用户的 prompt 转换成生成的位图图像，以及可追溯的最终 prompt。
 
-## When to Use This Skill
+## 运行环境要求
 
-Trigger this skill when the user asks for:
+⚠️ 本 skill 的"生成图像"这一步，依赖所在 AI agent 环境自带的文生图（text-to-image）能力。
 
-- a single quiet/minimal "emotion poster" or "情绪海报" from a theme, mood, photo, diary line, or short copy
-- a batch or series of such posters from a list, table, or CSV of themes
-- converting a photo into a sparse zine-style poster with paper texture and micro typography
+- 目前已验证可以在具备图像生成能力的 **Codex** 环境中完整运行——走完 Mode/Category/Prompt Compiler 流程后，agent 会直接调用图像生成能力产出真实图片文件。
+- **Claude Code CLI 本身不自带图像生成能力**。在纯 Claude Code CLI 环境下，本 skill 只能走完 Mode / Category / Prompt Compiler 的推理流程，产出最终的图像生成 prompt 文本，但无法直接生成图片文件。
+- 如果所在环境没有可用的文生图工具：请照常完成 Workflow 中 1-3 步（解析、选配方、编译 prompt），在第 4 步"生成图像"处明确告知用户当前环境不具备生图能力，并把编译好的最终 prompt 原样交给用户，由用户拿去有文生图能力的工具（例如接了图像生成能力的 Codex、Midjourney、DALL·E 等）执行生成。不要假装已经生成了图片。
 
-Do not use it for realistic photo editing, full-scene illustrations, commercial ad/poster layouts, or literal portrait photography — those fall outside this skill's visual grammar.
+## 何时使用这个 Skill (When to Use This Skill / 触发条件)
 
-This skill supports both single-image and batch production. Choose the mode, content category, and visual substyle from the user's prompt rather than asking the user to pick a separate skill.
+在用户提出以下需求时触发本 skill：
 
-The target image language is a quiet minimal zine emotion poster: tall aged paper, a very small visual event, precise micro typography, and one memorable accent color. Preserve the essence of sparse emotion-poster work without copying any creator's exact layout, title format, signature, watermark, recurring proprietary marks, or existing image.
+- 想要一张安静、极简的"情绪海报"（emotion poster），素材来自一个主题、情绪、照片、日记片段或短文案
+- 想要从一份清单、表格，或一批主题的 CSV，批量生成一系列这样的海报
+- 想把一张照片转换成留白很大、有纸张纹理和微型排版的 zine 风海报
 
-## Mode Routing
+不要用它来做写实修图、完整场景插画、商业广告/海报版式，或字面意义上的人物肖像摄影——这些都超出本 skill 的视觉语法范围。
 
-Use the user's prompt to choose a mode.
+本 skill 同时支持单图和批量生产。根据用户的 prompt 自行判断模式、内容类别和视觉子风格，而不是让用户去挑选另一个 skill。
 
-- Single Mode: one theme, sentence, object, photo, or mood.
-- Text Mode: the main input is a sentence, paragraph, poem, quote, title, or diary note.
-- Photo Mode: the user provides one or more images to transform into the poster system.
-- Batch Mode: the user asks for "batch", "一组", "多张", "批量", "系列", or gives a list, table, CSV, folder, or multiple independent items.
-- Series Mode: the user wants a visually coherent set with related recipes.
+目标图像语言是"安静极简的 zine 风情绪海报"：高留白的做旧纸张、一个极小的视觉事件、精确的微型排版，以及一个令人印象深刻的强调色。保留稀疏情绪海报作品的精神内核，但不要照搬任何创作者的具体版式、标题格式、签名、水印、重复出现的专有标记，或已有图像。
 
-Priority rules:
+## 模式路由（Mode Routing）
 
-- A list or table with 2 or more independent items means Batch Mode.
-- One supplied photo plus one brief means Photo Mode.
-- Multiple photos, or a photo folder plus multiple briefs, means Batch Mode or Series Mode.
-- A long paragraph should become Text Mode unless it contains multiple separate poster items.
-- If the prompt is ambiguous and the choice would materially change cost or output count, ask one concise clarification.
+根据用户的 prompt 选择一种模式。
 
-## Category Routing
+- Single Mode（单图模式）：一个主题、句子、物件、照片，或一种情绪。
+- Text Mode（文字驱动模式）：主要输入是一句话、一段文字、一首诗、一句引言、一个标题，或一段日记。
+- Photo Mode（照片驱动模式）：用户提供一张或多张图片，要求转换成本海报体系。
+- Batch Mode（批量模式）：用户要求"batch"、"一组"、"多张"、"批量"、"系列"，或给出了一份清单、表格、CSV、文件夹，或多个独立条目。
+- Series Mode（系列模式）：用户想要一组视觉上连贯、配方相关的海报。
 
-After choosing the mode, classify each output into one visual category.
+优先级规则：
 
-- Fruit: apple, pear, orange, tomato, guava, lemon, watermelon, strawberry, cherry, fruit soda, food-as-fruit.
-- Mood: empty space, pressure, healing, waiting, slow down, solitude, vulnerability, calmness, memory, breathing, staring blankly, freedom, light, rain, night.
-- People: self, child, woman, old age, gaze, relationship, dialogue, care, freedom, vulnerability, body, gesture, portrait prompt.
-- Still Object: kite, clock, ceramic, lantern, shell, coffee, branch, flower, tree, paper, chair, cone, fan, window, book, daily object.
+- 一份清单或表格里有 2 个或以上独立条目，判定为 Batch Mode。
+- 提供一张照片加一句简报，判定为 Photo Mode。
+- 提供多张照片，或一个照片文件夹加多份简报，判定为 Batch Mode 或 Series Mode。
+- 一段较长的文字，除非其中包含多个独立的海报条目，否则应判定为 Text Mode。
+- 如果 prompt 含糊不清，且不同判断会显著改变成本或产出数量，向用户提出一个简短的澄清问题。
 
-Category rules:
+## 类别路由（Category Routing）
 
-- If a prompt names a concrete fruit, use Fruit even when the copy is emotional.
-- If a prompt names a person or portrait, use People, but avoid literal face-forward portrait unless the user explicitly asks for one.
-- If a prompt names a physical non-fruit object, use Still Object.
-- If the prompt is abstract or mainly emotional, use Mood.
-- For batch work, record the category per row so the visual grammar varies intentionally.
+选定模式后，把每个输出归入一个视觉类别。
 
-## Category Grammars
+- Fruit（水果）：苹果、梨、橙子、番茄、番石榴、柠檬、西瓜、草莓、樱桃、水果汽水、以水果形式出现的食物。
+- Mood（情绪）：空、压力、治愈、等待、慢下来、孤独、脆弱、平静、记忆、呼吸、发呆、自由、光、雨、夜晚。
+- People（人物）：自我、孩子、女性、老年、凝视、关系、对话、关怀、自由、脆弱、身体、姿态、肖像类 prompt。
+- Still Object（静物）：风筝、时钟、陶瓷、灯笼、贝壳、咖啡、树枝、花、树、纸、椅子、锥形物、扇子、窗、书、日常物件。
 
-Use these category-specific visual grammars before selecting the final recipe.
+类别判定规则：
 
-### Fruit
+- 如果 prompt 点名了一种具体水果，即便文案很情绪化，也归为 Fruit。
+- 如果 prompt 点名了一个人或肖像，归为 People，但除非用户明确要求正面写实肖像，否则避免字面意义上的正脸构图。
+- 如果 prompt 点名了一个非水果的实体物件，归为 Still Object。
+- 如果 prompt 是抽象的或以情绪为主，归为 Mood。
+- 批量生产时，为每一行记录类别，让视觉语法有意地产生变化。
 
-- Treat fruit as a specimen, cutaway, translucent slice, torn paper print, or small color study.
-- Put the fruit cluster at center or slightly lower than center; keep it small enough that the paper reads first.
-- Use one high-recognition fruit color: tomato red, apple red, pale yellow, guava pink, citrus yellow, warm orange, or soft green.
-- Add micro labels, tiny date/weather text, faint ingredient-like notes, or barely readable editorial fragments.
-- Avoid cute fruit stickers, grocery ads, juicy commercial food photography, plates, tables, hands, and full still-life scenes.
+## 分类视觉语法（Category Grammars）
 
-### Mood
+在选定最终配方之前，先套用以下按类别划分的视觉语法。
 
-- Convert the mood into an abstract but imageable sign: blue dots, scattered stars, a thin line, a small shadow, a gray block, a misty paper window, a tiny distant landscape, or a sparse diagram.
-- The subject may be almost nothing; the emotional charge should come from position, empty space, paper tone, and micro type.
-- Electric blue, cobalt blue, pale cyan, gray-black, or one tiny red mark work well.
-- Use short poetic text, broken words, small annotations, serial numbers, or low-contrast ghost text.
-- Avoid literal emoji, therapy poster language, motivational quote layouts, large calligraphy, or decorative blobs.
+### Fruit（水果）
 
-### People
+- 把水果当作标本、切面、半透明切片、撕纸印刷,或一次小型色彩研究来处理。
+- 水果簇放在画面中心或略低于中心；保持足够小，让纸张本身先被读到。
+- 使用一种高辨识度的水果色：番茄红、苹果红、浅黄、番石榴粉、柑橘黄、暖橙,或柔和绿。
+- 加入微型标签、极小的日期/天气文字、若隐若现的类似成分说明,或几乎看不清的编辑体文字碎片。
+- 避免可爱的水果贴纸、生鲜广告、多汁的商业食物摄影、盘子、桌子、手,以及完整的静物场景。
 
-- Do not default to a realistic portrait. Translate people into a silhouette, cropped gesture, shadow, tiny back view, paper cutout, photo fragment, eye-line, or object that stands for a person.
-- Keep faces small, partial, obscured, or absent unless the user explicitly asks for an identifiable person.
-- Use documentary microtext, date/place notes, one quiet line of copy, and a small color accent attached to the person-symbol.
-- Good anchors: a small coat silhouette, a hand crop, a pair of eyes as paper texture, a tiny walking figure, a torn ID-photo fragment, a chair, a window, or a shadow.
-- Avoid fashion editorial, realistic headshots, beauty portraits, cinematic people scenes, social-media quote cards, and sentimental illustration.
+### Mood（情绪）
 
-### Still Object
+- 把情绪转化成一个抽象但可成像的符号：蓝色圆点、散落的星星、一条细线、一小片阴影、一个灰色色块、雾蒙蒙的纸窗、一处极小的远景,或一张稀疏的图解。
+- 主体可以几乎"什么都没有"；情绪张力应该来自位置、留白、纸张色调和微型排版本身。
+- 电光蓝、钴蓝、浅青、灰黑,或一个极小的红色标记都很合适。
+- 使用简短的诗意文字、断裂的词语、小小的注解、序号,或低对比的"幽灵文字"。
+- 避免字面意义的表情符号、治愈系海报式语言、鸡汤金句版式、大幅书法,或装饰性的色块团。
 
-- Treat the object as a scanned specimen or tiny museum label object on paper.
-- Use one object only, or one object plus one small paper/photo fragment.
-- Favor thin branch diagrams, old fan, clock, ceramic, shell, kite, flower, paper scrap, cup, book, lantern, window, or everyday tool.
-- Pair the object with micro annotations, small English fragments, date/weather, a tiny index number, or measurement-like type.
-- Avoid product ads, realistic tabletop photography, cozy lifestyle scenes, dense collage, large shadows, and obvious mockups.
+### People（人物）
 
-## Visual Substyle Routing
+- 不要默认画成写实肖像。把"人"转译成剪影、被裁切的姿态、阴影、极小的背影、纸质剪影、照片碎片、一条视线,或某个代指人的物件。
+- 除非用户明确要求一个可辨认的人物，否则脸部应保持极小、局部、被遮挡,或干脆不出现。
+- 使用纪实风格的微型文字、日期/地点注解、一句安静的文案,以及附着在"人物符号"上的一小块强调色。
+- 好用的锚点：一个小外套剪影、一个手部裁切、作为纸张纹理的一双眼睛、一个极小的行走人影、一张撕破的证件照碎片、一把椅子、一扇窗,或一片阴影。
+- 避免时装编辑大片、写实证件照式头像、美妆写真、电影感人物场景、社交媒体金句卡片,以及煽情插画。
 
-After category routing, choose one visual substyle. The substyle controls the image grammar; the content category controls what the subject becomes.
+### Still Object（静物）
 
-- `blue-signal`: saturated blue dots, blue words, blue brush/cutout marks, or blue fragments carry the emotion.
-- `photo-window`: one small photo, two stacked photo panels, or a narrow vertical strip of tiny images floats on paper.
-- `fruit-specimen`: fruit is treated as a cutaway, translucent slice, old printed specimen, or small color study.
-- `person-obscured`: people appear as a tiny back view, cropped gesture, shadow, ID-photo fragment, or obscured face.
-- `text-field`: typography is the main visual event; image may be absent or secondary.
-- `object-archive`: a non-fruit object becomes a scanned specimen with labels, measurement text, or diagram marks.
-- `editorial-page`: a more magazine-like composition with larger text, long ghost text, binder/page feeling, or layered text blocks.
+- 把物件当作一份扫描标本，或纸上的一件小型博物馆标签物品来处理。
+- 只用一个物件，或一个物件加一小块纸张/照片碎片。
+- 优先选择细线条的树枝图解、旧扇子、时钟、陶瓷、贝壳、风筝、花、纸片、杯子、书、灯笼、窗,或日常工具。
+- 给物件配上微型注解、少量英文字词碎片、日期/天气、一个极小的索引号,或类似测量数据的排版。
+- 避免产品广告感、写实的桌面摄影、温馨生活方式场景、密集拼贴、大面积阴影,以及明显的样机效果。
 
-Substyle selection rules:
+## 视觉子风格路由（Visual Substyle Routing）
 
-- Fruit usually starts with `fruit-specimen`; use `photo-window` only when a fruit is paired with sky, field, season, or memory.
-- Mood can use `blue-signal`, `text-field`, `photo-window`, or `editorial-page`.
-- People usually use `person-obscured`; use `photo-window` for memory/back-view scenes and `text-field` for identity/self-definition prompts.
-- Still Object usually uses `object-archive`; use `blue-signal` for shells, dots, stars, or abstract object fields; use `photo-window` for sea, sky, snow, and landscape fragments.
-- For a batch, rotate substyles. Do not let every image become the same tiny photo window or blue-dot field.
+完成类别路由后，选择一种视觉子风格。子风格控制画面语法；内容类别控制主体会变成什么。
 
-## First-Principles Prompt Fields
+- `blue-signal`：饱和的蓝色圆点、蓝色文字、蓝色笔刷/剪切标记,或蓝色碎片承载情绪。
+- `photo-window`：一张小照片、两张叠放的照片面板，或一条窄窄的竖向小图条浮在纸面上。
+- `fruit-specimen`：水果被处理成切面、半透明切片、老式印刷标本,或一次小型色彩研究。
+- `person-obscured`：人物以极小的背影、被裁切的姿态、阴影、证件照碎片,或被遮挡的脸出现。
+- `text-field`：排版本身是主要的视觉事件；图像可以缺席或退居次要。
+- `object-archive`：一件非水果物件变成带标签、测量文字或图解标记的扫描标本。
+- `editorial-page`：更接近杂志式的构图，有更大的文字、长段的幽灵文字、装订本/书页的质感，或分层的文字块。
 
-Every final prompt must answer these rendering questions in order. Use the answers as concrete visual constraints, not as analysis prose.
+子风格选择规则：
 
-1. Canvas: tall 3:5 paper poster, full-frame aged paper, no border or mockup.
-2. Attention Geometry: 70%-90% empty paper, one cluster or text event around 8%-24% of the canvas, no edge-hugging unless the chosen substyle requires drifting text.
-3. Content Category: Fruit, Mood, People, or Still Object.
-4. Visual Substyle: one of `blue-signal`, `photo-window`, `fruit-specimen`, `person-obscured`, `text-field`, `object-archive`, or `editorial-page`.
-5. Image Anchor: one object, photo crop, silhouette, color block, text field, trace, or specimen.
-6. Anchor Treatment: scanned paper, old photo, photocopy, halftone, risograph ink, torn edge, soft edge, misregistration, line diagram, or low-contrast print.
-7. Typography System: tiny serif/typewriter/monospaced text, fragmented English/Chinese, date/weather/place, label text, or ghost body copy.
-8. Color Logic: one high-recognition color anchor visible at thumbnail size, with the rest subdued.
-9. Resolution and Clarity: high-resolution source, crisp anchor edges, readable main short text, and texture applied as print character rather than blur.
-10. Emotional Temperature: quiet, distant, private, poetic, archival, sparse, restrained.
-11. Hard Avoids: no full scene, ad, large commercial headline, sticker collage, fashion/beauty portrait, 3D, neon, glossy mockup, or generic template polish.
+- Fruit 通常从 `fruit-specimen` 起手；只有当水果与天空、田野、季节,或记忆搭配时，才用 `photo-window`。
+- Mood 可以用 `blue-signal`、`text-field`、`photo-window`,或 `editorial-page`。
+- People 通常用 `person-obscured`；记忆/背影类场景用 `photo-window`，身份/自我定义类 prompt 用 `text-field`。
+- Still Object 通常用 `object-archive`；贝壳、圆点、星星,或抽象物件场时用 `blue-signal`；海、天空、雪,和风景碎片用 `photo-window`。
+- 批量生产时轮换子风格，不要让每张图都变成同一种小照片窗口，或同一种蓝点场。
 
-## Color Engine
+## 第一性原理 Prompt 字段（First-Principles Prompt Fields）
 
-Use one main high-recognition color per image.
+每条最终 prompt 都必须按顺序回答以下渲染问题。把答案当作具体的视觉约束来写，而不是分析性的散文。
 
-- Default to a visible opaque or saturated color anchor: electric blue, cobalt blue, sky blue, tomato red, apple red, guava pink, citrus yellow, pale yellow, soft green, or warm orange.
-- Keep paper, grayscale photos, microtext, and secondary marks subdued.
-- The color anchor should occupy about 0.8%-3% of the whole canvas or 15%-40% of the visual cluster.
-- Color can be the subject itself, a brush/cutout mark, a printed block, blue dots, broken type, a photo tint, or a small flat silhouette.
-- Do not weaken the main color with wording like `muted`, `faded`, `pastel`, `low saturation`, or `near-monochrome` unless the user explicitly asks for muted output.
-- Use `charcoal-black` as an accent only when the poster depends on black-and-white archive/photo logic; otherwise choose a chromatic accent.
-- For batches, at least half the outputs should have a clearly visible chromatic anchor, not only gray photos and tiny black text.
+1. 画布（Canvas）：竖版 3:5 纸质海报，满幅做旧纸张，不要边框或样机效果。
+2. 注意力几何（Attention Geometry）：70%-90% 空白纸面，一个视觉簇或文字事件占画面约 8%-24%，除非所选子风格需要漂浮文字，否则不要贴边。
+3. 内容类别（Content Category）：Fruit（水果）、Mood（情绪）、People（人物）,或 Still Object（静物）。
+4. 视觉子风格（Visual Substyle）：`blue-signal`、`photo-window`、`fruit-specimen`、`person-obscured`、`text-field`、`object-archive`,或 `editorial-page` 之一。
+5. 图像锚点（Image Anchor）：一个物件、一张照片裁切、一个剪影、一个色块、一个文字区域、一道痕迹,或一件标本。
+6. 锚点处理方式（Anchor Treatment）：扫描纸张、旧照片、影印、网点、孔版印刷墨色、撕边、软边、套印错位、线条图解,或低对比印刷。
+7. 排版系统（Typography System）：极小的衬线体/打字机体/等宽字体、破碎的中英文、日期/天气/地点、标签文字,或幽灵正文。
+8. 色彩逻辑（Color Logic）：一个在缩略图尺寸下依然清晰可见的高辨识度色彩锚点，其余保持克制。
+9. 分辨率与清晰度（Resolution and Clarity）：高分辨率原图、锚点边缘清晰、主要短文字可读，纹理作为印刷质感呈现而非模糊。
+10. 情绪温度（Emotional Temperature）：安静、疏离、私密、诗意、档案感、稀疏、克制。
+11. 硬性避免项（Hard Avoids）：不要完整场景、广告、大幅商业标题、贴纸拼贴、时装/美妆肖像、3D、霓虹、光面样机,或千篇一律的模板化精修感。
 
-## Resolution and Clarity
+## 色彩引擎（Color Engine）
 
-Low-fidelity print style must not mean low-resolution output.
+每张图使用一种主要的高辨识度色彩。
 
-- Prompt for a high-resolution vertical poster source suitable for sharp mobile viewing and later 2x export.
-- Keep the paper texture, scan noise, halftone, xerox wear, and ink bleed subtle enough that they do not blur the main anchor.
-- Main short text, date labels, specimen labels, and primary micro typography should have crisp letterforms. Secondary ghost text may be semi-legible.
-- Fruit pulp lines, photo-window edges, silhouettes, blue dots, color blocks, branch diagrams, and object contours should remain clean and defined.
-- Avoid wording such as `blurry`, `out of focus`, `soft overall image`, `low resolution`, `pixelated`, or `heavy degradation` unless the user explicitly asks for that defect.
-- If the built-in generator returns a small image, report the actual pixel size. For project-bound use, create or request a higher-resolution version rather than treating a small preview as final.
+- 默认使用一个可见的、不透明或高饱和的色彩锚点：电光蓝、钴蓝、天蓝、番茄红、苹果红、番石榴粉、柑橘黄、浅黄、柔和绿,或暖橙。
+- 保持纸张、灰阶照片、微型文字和次要标记的克制感。
+- 色彩锚点大约占整个画布的 0.8%-3%，或占视觉簇的 15%-40%。
+- 色彩可以是主体本身、一个笔刷/剪切标记、一个印刷色块、蓝色圆点、破碎字体、照片色调,或一个小的平面剪影。
+- 不要用 `muted`（柔和）、`faded`（褪色）、`pastel`（粉彩）、`low saturation`（低饱和）,或 `near-monochrome`（近乎单色）这类措辞削弱主色，除非用户明确要求柔和的输出。
+- 只有当海报依赖黑白档案/照片逻辑时，才用 `charcoal-black`（炭黑）作为强调色；否则选择一个彩色强调色。
+- 批量生产时，至少一半的输出应该有清晰可见的彩色锚点，不要全是灰色照片和极小的黑色文字。
 
-## Input Contract
+## 分辨率与清晰度（Resolution and Clarity）
 
-For batch work, accept CSV rows, Markdown tables, numbered lists, plain lists of themes, or a folder of reference images plus a short brief.
+低保真的印刷风格，不等于低分辨率的输出。
 
-Normalize batch inputs internally to:
+- 在 prompt 中要求高分辨率的竖版海报原图，适合在手机上清晰查看，也便于之后做 2 倍放大导出。
+- 让纸张纹理、扫描噪点、网点、影印磨损和墨渍保持轻微，不要模糊到主锚点。
+- 主要的短文字、日期标签、标本标签和主要的微型排版，字形应该清晰锐利。次要的幽灵文字可以半透明、半可读。
+- 水果果肉纹理、照片窗口边缘、剪影、蓝色圆点、色块、树枝图解和物件轮廓，都应保持干净、边界清晰。
+- 除非用户明确要求，否则避免使用 `blurry`（模糊）、`out of focus`（失焦）、`soft overall image`（整体柔焦）、`low resolution`（低分辨率）、`pixelated`（像素化）,或 `heavy degradation`（严重劣化）这类措辞。
+- 如果内置生成器返回的图像尺寸较小，向用户报告实际的像素尺寸。用于正式项目时，应重新生成或请求更高分辨率的版本，而不是把小尺寸预览图当作最终成品。
+
+## 输入契约（Input Contract）
+
+对于批量任务，接受 CSV 行、Markdown 表格、编号列表、纯主题清单，或一个参考图片文件夹加一段简短简报。
+
+将批量输入内部归一化为：
 
 ```csv
 id,theme,copy,mood,accent,reference_image,notes
 001,橘子汽水,夏天慢慢醒来,summer,warm-orange,,
 ```
 
-Required fields:
+必填字段：
 
-- `id`: stable output ID. Create one if missing.
-- `theme`: central subject or idea.
+- `id`：稳定的输出编号。如果缺失就自己创建一个。
+- `theme`：中心主题或想法。
 
-Optional fields:
+可选字段：
 
-- `copy`: exact short in-image phrase.
-- `mood`: emotional direction.
-- `accent`: requested accent color.
-- `reference_image`: local path or attached image role.
-- `notes`: constraints, target platform, aspect ratio, or series direction.
+- `copy`：要出现在图中的确切短句。
+- `mood`：情绪方向。
+- `accent`：用户指定的强调色。
+- `reference_image`：本地路径，或已附带图片的角色说明。
+- `notes`：约束条件、目标平台、画幅比例，或系列方向。
 
-Keep user-supplied text exact when it is meant to appear in the image. For long copy, extract one short phrase for the image and keep the rest as interpretation context.
+当用户提供的文字是要出现在图像中的内容时，保持原文精确不变。对于较长的文案，为图像本身提炼出一句短语，其余部分作为解读上下文保留。
 
-## Prompt Compiler
+## Prompt 编译器（Prompt Compiler）
 
-Write each final image prompt as four compact paragraphs describing visible pixels only.
+把每条最终图像 prompt 写成四段紧凑的段落，只描述画面里可见的像素。
 
-Paragraph 1: canvas and composition
+第一段：画布与构图
 
-- Tall vertical paper poster, default 3:5. Use 4:5 only when the user or target platform requires it.
-- Warm white, off-white, pale gray, gray-beige, or lightly aged matte paper.
-- 70%-90% quiet empty paper.
-- One small visual cluster, roughly 8%-24% of the canvas.
-- Cluster position: center, slightly above center, slightly below center, lower-left, upper-right, or a quiet off-center point.
-- No border, realistic frame, app UI, or product mockup.
+- 竖版纸质海报，默认 3:5。只有当用户或目标平台要求时才用 4:5。
+- 暖白、米白、浅灰、灰米色，或轻微做旧的哑光纸张。
+- 70%-90% 安静的空白纸面。
+- 一个小的视觉簇，大约占画布的 8%-24%。
+- 视觉簇位置：居中、略高于中心、略低于中心、左下、右上，或一个安静的偏心位置。
+- 不要边框、写实相框、app UI，或产品样机效果。
 
-Paragraph 2: subject and image anchor
+第二段：主体与图像锚点
 
-- Convert the theme into one imageable anchor based on its category grammar and visual substyle.
-- The anchor must be readable at thumbnail size but still physically small on the page.
-- Good anchors: fruit cutaway, plant branch, star field, blue-dot constellation, blue brush mask, small photo crop, torn paper block, thin diagram, daily object, tiny silhouette, obscured face, shadow, window, landscape scrap, ghost text block, or abstract emotional symbol.
-- If a photo is supplied, treat it as a small paper clipping, contact sheet, washed photo panel, or cropped fragment inside the layout.
-- Prefer one clear metaphor over a complete illustrated scene.
+- 根据类别语法和视觉子风格，把主题转化成一个可成像的锚点。
+- 锚点在缩略图尺寸下必须清晰可辨，但在整张海报上依然物理意义上很小。
+- 好用的锚点：水果切面、植物枝条、星场、蓝点星座、蓝色笔刷遮罩、小张照片裁切、撕纸色块、细线图解、日常物件、极小剪影、被遮挡的脸、阴影、窗、风景碎片、幽灵文字块，或抽象的情绪符号。
+- 如果提供了照片，把它当作版面内的一张小纸质剪贴、一张联系样片、一块洗印过的照片面板，或一个裁切碎片来处理。
+- 用一个清晰的隐喻，而不是一整个完整的插画场景。
 
-Paragraph 3: typography, accent, and print behavior
+第三段：排版、强调色与印刷质感
 
-- Use tiny serif, monospaced, typewriter, or delicate editorial caption text.
-- Use one short readable phrase in Chinese or English, plus optional microtext that can be partly unreadable. In `text-field` and `editorial-page`, typography may become the main visual event.
-- Optional microtext: date, weather, place, material label, index number, tiny archive note, measurement, broken English words, scattered letters, or a low-contrast body-text field.
-- Use one restrained but visible accent color from the Color Engine; it should carry the poster's memory at thumbnail size.
-- Add paper fibers, scan noise, faint pencil marks, risograph grain, light ink bleed, xerox softness, washed print, or halftone degradation.
-- Keep the main anchor edges and primary short text crisp; paper defects should stay in the surface, not smear the subject.
+- 使用极小的衬线体、等宽字体、打字机体，或精致的编辑体标注文字。
+- 用中文或英文写一句简短可读的短语，再加上可以部分难以辨认的可选微型文字。在 `text-field` 和 `editorial-page` 里，排版可以成为主要的视觉事件。
+- 可选微型文字：日期、天气、地点、材料标签、索引号、极小的档案注记、测量数据、破碎的英文单词、散落的字母，或低对比的正文文字区域。
+- 使用色彩引擎里一种克制但清晰可见的强调色；它应该在缩略图尺寸下承载整张海报的记忆点。
+- 加入纸纤维、扫描噪点、淡淡的铅笔痕迹、孔版印刷颗粒、轻微墨渍、影印质感、洗印感,或网点劣化。
+- 保持主锚点边缘和主要短文字清晰；纸张瑕疵应该停留在表层，不要糊到主体上。
 
-Paragraph 4: mood and negative constraints
+第四段：情绪与负面约束
 
-- Flat orthographic scanned-paper mood.
-- Quiet, private, poetic, slow, airy, restrained, slightly nostalgic, editorial, low-fidelity print.
-- Avoid full-bleed scenes, commercial ads, large headlines, logos, CTA, glossy mockups, hard shadows, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, stock-photo realism, motivational quote posters, and generic AI poster polish.
+- 平铺直叙、正视角的扫描纸张氛围。
+- 安静、私密、诗意、缓慢、通透、克制、略带怀旧、编辑感、低保真印刷。
+- 避免满版场景、商业广告、大幅标题、logo、CTA、光面样机、生硬阴影、电影感打光、3D、霓虹、动漫风、可爱贴纸、密集拼贴、图库摄影式写实、鸡汤金句海报,以及千篇一律的通用 AI 海报精修感。
 
-## Recipe Axes
+## 配方维度（Recipe Axes）
 
-Pick one value from each axis for every image. For batch work, vary the recipe across rows while preserving the requested series direction.
+每张图从每个维度中选一个值。批量生产时，在保持系列方向一致的前提下，让各行之间的配方产生变化。
 
-### Layout
+### 版式（Layout）
 
-- `center-specimen`: one tiny object or photo fragment centered in large empty paper
-- `lower-left-diary`: small cluster low and left, with quiet empty upper space
-- `upper-right-note`: tiny paper/photo block upper-right with loose microtext
-- `micro-contact-sheet`: 3-6 very small panels arranged as a compact contact sheet
-- `paper-fragment-stack`: two or three overlapping scraps
-- `type-and-object`: short phrase and one small object form the cluster
-- `blue-dot-field`: saturated blue dots placed sparsely across quiet paper
-- `blue-brush-mask`: one saturated blue brush or paper strip obscures a face, word, or small image
-- `star-orbit`: stars, dots, or scattered letters loosely orbit a small anchor
-- `fruit-cutaway-study`: fruit slice or cutaway as a tiny specimen
-- `thin-diagram`: fine annotation lines around one object
-- `small-window-block`: one small rectangular photo/color block with micro labels
-- `vertical-photo-strip`: two or three tiny photo windows stacked vertically
-- `dual-photo-panel`: two adjacent or stacked photo panels with a narrow gap
-- `quiet-silhouette`: tiny person, shadow, gesture, or partial figure in empty paper
-- `ghost-text-page`: faint large text field or body-copy block becomes background texture
-- `type-as-object`: larger experimental text acts as the main anchor
+- `center-specimen`：一个极小的物件或照片碎片，居中放在大片空白纸面上
+- `lower-left-diary`：小视觉簇偏左下，上方留白安静
+- `upper-right-note`：右上方一小块纸/照片，配松散的微型文字
+- `micro-contact-sheet`：3-6 个极小的画格，排成一张紧凑的联系样片
+- `paper-fragment-stack`：两三张互相叠放的纸片
+- `type-and-object`：一句短语加一个小物件组成视觉簇
+- `blue-dot-field`：饱和蓝色圆点稀疏地散布在安静纸面上
+- `blue-brush-mask`：一笔饱和的蓝色笔刷或纸条，遮住一张脸、一个字，或一小张图
+- `star-orbit`：星星、圆点，或散落字母松散地环绕一个小锚点
+- `fruit-cutaway-study`：水果切片或切面，作为一份极小的标本
+- `thin-diagram`：环绕一个物件的细线注解
+- `small-window-block`：一小块方形照片/色块，配微型标签
+- `vertical-photo-strip`：两三张极小照片窗口竖向叠放
+- `dual-photo-panel`：两张相邻或叠放的照片面板，中间留一道窄缝
+- `quiet-silhouette`：一个极小的人物、阴影、姿态,或局部人影，置于空白纸面上
+- `ghost-text-page`：一大片淡淡的文字区域或正文色块，成为背景纹理
+- `type-as-object`：更大幅的实验性文字，作为主要锚点
 
-### Anchor
+### 锚点（Anchor）
 
 - `fruit-specimen`
 - `translucent-fruit-slice`
@@ -260,7 +268,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `abstract-texture-window`
 - `micro-contact-sheet`
 
-### Typography
+### 排版（Typography）
 
 - `tiny-caption`
 - `edge-phrase`
@@ -276,7 +284,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `specimen-label`
 - `small-title-plus-index`
 
-### Texture
+### 纹理（Texture）
 
 - `aged-paper-fibers`
 - `soft-scan-noise`
@@ -288,7 +296,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `subtle-halftone`
 - `low-contrast-photocopy`
 
-### Mood
+### 情绪（Mood）
 
 - `summer`
 - `quiet`
@@ -309,7 +317,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `slow`
 - `blank`
 
-### Accent
+### 强调色（Accent）
 
 - `electric-blue`
 - `cobalt-blue`
@@ -324,82 +332,83 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `warm-orange`
 - `charcoal-black`
 
-## Workflow
+## 工作流程（Workflow）
 
-1. Parse the user's content.
-   - Identify mode, category, visual substyle, central subject, mood, exact text if supplied, visual metaphor, and whether reference images are used.
-   - For a complex idea, reduce it to one imageable metaphor.
-   - If no image text is supplied, invent one short poetic phrase in the user's language.
+1. 解析用户的内容。
+   - 识别模式、类别、视觉子风格、中心主题、情绪、用户提供的确切文字（如有）、视觉隐喻，以及是否使用了参考图片。
+   - 对于复杂的想法，把它压缩成一个可成像的隐喻。
+   - 如果用户没有提供图内文字，用用户所用的语言，创作一句简短的诗意短语。
 
-2. Select a variation recipe.
-   - Pick a category-specific recipe from `prompt-recipes.md` when useful.
-   - Pick substyle, layout, anchor, typography, texture, mood, and accent.
-   - For batches, avoid repeating the same substyle or layout unless the user asks for strict series consistency.
-   - If the composition becomes dense, remove objects before reducing empty space.
+2. 选择一套变化配方。
+   - 在有用时，从 `prompt-recipes.md` 里挑选一个对应类别的配方。
+   - 选定子风格、版式、锚点、排版、纹理、情绪,和强调色。
+   - 批量生产时，除非用户要求严格的系列一致性，否则避免重复同一种子风格或版式。
+   - 如果构图变得拥挤，先移除物件，而不是压缩留白。
 
-3. Compile one final image prompt per output.
-   - Use the four-paragraph Prompt Compiler.
-   - Specify the exact in-image phrase only when useful.
-   - Keep main readable text short because image models often distort long text.
-   - State anchor location, approximate size, accent color, and paper treatment.
-   - Explicitly say the image is flat and scanned, not a scene, mockup, or ad.
+3. 为每个输出编译一条最终图像 prompt。
+   - 使用四段式 Prompt 编译器。
+   - 只在有必要时指定图内确切文字。
+   - 保持主要可读文字简短，因为图像模型经常会扭曲较长的文字。
+   - 说明锚点位置、大致尺寸、强调色，以及纸张处理方式。
+   - 明确说明这是一张平铺、被扫描的图像，不是一个场景、样机,或广告。
 
-4. Generate images.
-   - Use built-in image generation by default.
-   - For each batch row, generate one image first.
-   - Regenerate only when the output fails the Quality Gate or the user asks for variants.
-   - Do not stop after prompt-only unless the user explicitly asks for prompt-only.
+4. 生成图像。
+   - 默认使用所在环境内置的图像生成能力。
+   - 如果所在环境（如纯 Claude Code CLI）没有可用的图像生成能力，明确告知用户，并把编译好的最终 prompt 原样交给用户，供其在有文生图能力的工具中使用；不要虚构或假装已生成图片。
+   - 每一批量行，先生成一张图。
+   - 只有当输出未通过质量校验（Quality Gate），或用户要求变体时，才重新生成。
+   - 除非用户明确要求仅输出 prompt，否则不要在只给出 prompt 后就停下。
 
-5. Record the run.
-   - For one image, return image, final prompt, category, recipe, and a short interpretation note.
-   - For batch work, maintain an index with one section per output.
+5. 记录本次运行。
+   - 单图任务：返回图像、最终 prompt、类别、配方，以及一段简短的解读说明。
+   - 批量任务：维护一份索引，每个输出各占一个小节。
 
-## Series Rules
+## 系列规则（Series Rules）
 
-For a series, keep these consistent:
+对于一个系列，保持以下内容一致：
 
-- aspect ratio
-- paper tone
-- general text scale
-- overall negative-space discipline
-- image treatment family
-- one visual category per row, recorded in the output index
-- one visual substyle per row, recorded in the output index
+- 画幅比例
+- 纸张色调
+- 整体文字尺度
+- 整体留白纪律
+- 图像处理风格家族
+- 每一行一种视觉类别，并记录在输出索引中
+- 每一行一种视觉子风格，并记录在输出索引中
 
-Vary these across images:
+在不同图像之间做出变化：
 
-- layout position
-- anchor metaphor
-- visual substyle
-- accent hue
-- typography behavior
-- texture mode
+- 版式位置
+- 锚点隐喻
+- 视觉子风格
+- 强调色色相
+- 排版行为
+- 纹理模式
 
-For a coherent 9-image batch, use no more than 3 paper tones and no more than 5 accent hues.
+对于一个连贯的 9 张图批量任务，最多使用 3 种纸张色调，最多使用 5 种强调色。
 
-## Quality Gate
+## 质量校验（Quality Gate）
 
-Before returning, check every generated image:
+在返回之前，检查每一张生成的图像：
 
-- Is it a tall vertical paper poster, preferably 3:5?
-- Is 70%-90% of the image empty paper?
-- Is there only one main visual anchor?
-- Is the anchor small but still recognizable at thumbnail size?
-- Does the category grammar match the theme?
-- Does the visual substyle match the category and avoid repeating recent outputs?
-- Is typography micro, delicate, and editorial rather than a large headline?
-- Is there one restrained high-recognition accent color?
-- Is the color anchor visible at thumbnail size, with enough area to read?
-- Are the main anchor, photo-window edge, fruit/object contour, and primary short text crisp enough for mobile viewing?
-- Does the image feel scanned, printed, aged, or low-fidelity instead of digitally clean?
-- Does it avoid copying a specific creator's signature, watermark, title format, or existing image?
-- Does it avoid full-bleed illustration, dense scrapbook, glossy ad, 3D, neon, anime, cute stickers, motivational quote cards, commercial cover design, and stock-photo realism?
+- 是否是竖版纸质海报，最好是 3:5？
+- 是否有 70%-90% 的画面是空白纸张？
+- 是否只有一个主要视觉锚点？
+- 锚点是否够小，但在缩略图尺寸下依然可辨认？
+- 类别语法是否与主题匹配？
+- 视觉子风格是否与类别匹配，并避免和最近的输出重复？
+- 排版是否微小、精致、编辑感十足，而不是大幅标题？
+- 是否有一种克制但高辨识度的强调色？
+- 强调色在缩略图尺寸下是否可见，且面积足以被读到？
+- 主锚点、照片窗口边缘、水果/物件轮廓,和主要短文字，是否在手机屏幕上足够清晰？
+- 画面是否给人扫描、印刷、做旧、低保真的感觉，而不是数字感很强的"干净"？
+- 是否避免了照搬某个具体创作者的签名、水印、标题格式，或已有图像？
+- 是否避免了满版插画、密集的拼贴本、光面广告感、3D、霓虹、动漫风、可爱贴纸、鸡汤金句卡片、商业封面设计,以及图库摄影式写实？
 
-If an output fails, regenerate once with stronger constraints.
+如果某个输出未通过，用更强的约束重新生成一次。
 
-## Output Format
+## 输出格式（Output Format）
 
-For one image:
+单图输出：
 
 ````markdown
 **生成图**
@@ -418,10 +427,10 @@ For one image:
 - Category: [Fruit / Mood / People / Still Object]
 - Substyle: [blue-signal / photo-window / fruit-specimen / person-obscured / text-field / object-archive / editorial-page]
 - Recipe: [substyle / layout / anchor / typography / accent / texture / mood]
-- [one short note about how the user's input was interpreted]
+- [一句简短说明，解读了用户输入的哪些内容]
 ````
 
-For batch output, return a compact index first, then image sections:
+批量输出：先返回一份简明索引，再逐个给出每张图的小节：
 
 ````markdown
 # Batch Run: [run name]
@@ -439,7 +448,7 @@ For batch output, return a compact index first, then image sections:
 ```
 ````
 
-## Example Requests
+## 示例请求
 
 - "用这个 skill 做一张关于周末的图"
 - "主题：橘子汽水，文案：夏天慢慢醒来"

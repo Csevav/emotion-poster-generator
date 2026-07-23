@@ -26,6 +26,15 @@ skill:
 Batch requests (a list, table, or CSV of themes) produce a full run with an
 index table and one section per generated poster.
 
+## Requirements
+
+The image-generation step depends on the host AI agent's built-in text-to-image
+capability. This has been verified to work end-to-end in image-capable **Codex**
+environments. **Claude Code CLI does not include built-in image generation**, so
+in a plain Claude Code CLI environment this skill can only run the
+Mode/Category/Prompt Compiler steps and produce the final prompt text — it
+cannot generate the actual image file.
+
 ## Examples
 
 | Lemon | Rainy Day |
