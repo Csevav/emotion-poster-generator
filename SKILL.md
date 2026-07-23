@@ -1,11 +1,23 @@
 ---
 name: emotion-poster-generator
 description: Generate one or many quiet minimal zine emotion posters from themes, photos, short copy, diary notes, fruits, moods, people, still objects, lists, tables, or batch briefs. Use when the user wants sparse vertical paper posters with huge negative space, one small symbolic anchor, micro typography, scanned-paper texture, and one restrained high-recognition accent color.
+version: 1.0.0
+tags: [image-generation, poster-design, prompt-engineering, batch-generation, zine-aesthetic]
 ---
 
 # Emotion Poster Generator
 
 Turn the user's prompt into generated raster images plus traceable prompts.
+
+## When to Use This Skill
+
+Trigger this skill when the user asks for:
+
+- a single quiet/minimal "emotion poster" or "情绪海报" from a theme, mood, photo, diary line, or short copy
+- a batch or series of such posters from a list, table, or CSV of themes
+- converting a photo into a sparse zine-style poster with paper texture and micro typography
+
+Do not use it for realistic photo editing, full-scene illustrations, commercial ad/poster layouts, or literal portrait photography — those fall outside this skill's visual grammar.
 
 This skill supports both single-image and batch production. Choose the mode, content category, and visual substyle from the user's prompt rather than asking the user to pick a separate skill.
 
