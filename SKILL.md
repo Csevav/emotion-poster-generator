@@ -9,6 +9,12 @@ tags: [image-generation, poster-design, prompt-engineering, batch-generation, zi
 
 把用户的 prompt 转换成生成的位图图像，以及可追溯的最终 prompt。
 
+## 示例
+
+| 柠檬 | 下雨天 |
+| --- | --- |
+| ![柠檬](examples/lemon.png) | ![下雨天](examples/rainy-day.png) |
+
 ## 运行环境要求
 
 ⚠️ 本 skill 的"生成图像"这一步，依赖所在 AI agent 环境自带的文生图（text-to-image）能力。
