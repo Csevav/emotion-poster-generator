@@ -1,102 +1,154 @@
 # Prompt Recipes
 
-Use these recipes to make batch output fast and varied. Pick one recipe per image, then compile it through `SKILL.md`.
+Use these recipes to make output fast, varied, and closer to the target minimal zine emotion-poster language. Classify each theme first, then choose a recipe inside that category.
 
-## Quick Recipes
+## Fruit
 
-### Fruit Diary
+### Translucent Fruit Slice
 
-- Layout: `lower-left-diary`
-- Anchor: `fruit-specimen`
-- Typography: `tiny-caption`
-- Texture: `paper-fibers`
-- Mood: `summer` or `small-joy`
-- Best for: 橘子、梨、苹果、西瓜、樱桃、柠檬、番茄
+- Layout: `fruit-cutaway-study`
+- Anchor: `translucent-fruit-slice`
+- Typography: `date-weather-label`
+- Texture: `aged-paper-fibers`
+- Accent: `citrus-yellow`, `warm-orange`, `guava-pink`, or `soft-green`
+- Best for: 橘子、柠檬、梨、芭乐、西瓜、苹果切片
+- Notes: Make the fruit feel thin, printed, and slightly transparent. Keep the slice cluster small.
 
-### Night Micro Poster
-
-- Layout: `star-orbit`
-- Anchor: `hand-drawn-line-object`
-- Typography: `scattered-letters`
-- Texture: `soft-scan-noise`
-- Mood: `night` or `solitude`
-- Best for: 看星星、失眠、夜晚、梦、安静
-
-### Photo Fragment
-
-- Layout: `upper-right-note`
-- Anchor: `tiny-faded-photo`
-- Typography: `archive-microtext`
-- Texture: `washed-photo-print`
-- Mood: `memory`
-- Best for: 用户给照片时，把照片变成小纸片、证据、档案或回忆碎片
-
-### Contact Sheet
-
-- Layout: `six-card-contact-sheet`
-- Anchor: `mini-contact-sheet`
-- Typography: `specimen-label`
-- Texture: `xerox-softness`
-- Mood: `afternoon`
-- Best for: 系列素材、旅行、拍摄、生活片段、多个小物件
-
-### Inner Growth
+### Single Fruit Specimen
 
 - Layout: `center-specimen`
-- Anchor: `botanical-specimen`
-- Typography: `gray-ghost-text`
-- Texture: `faint-pencil-annotation`
-- Mood: `inward`
-- Best for: 向内生长、恢复、等待、枯木待春、重新开始
+- Anchor: `fruit-specimen`
+- Typography: `specimen-label`
+- Texture: `soft-scan-noise`
+- Accent: `tomato-red`, `apple-red`, `pale-yellow`, or `warm-orange`
+- Best for: 番茄、苹果、梨、樱桃、橘子
+- Notes: Use one fruit or one cut fruit. Add tiny labels and one short phrase, not a food scene.
 
-### Seaside Note
+### Fruit Plus Paper Block
 
-- Layout: `paper-fragment-stack`
-- Anchor: `small-monochrome-landscape`
-- Typography: `edge-phrase`
-- Texture: `subtle-halftone`
-- Mood: `seaside`
-- Best for: 海边、旅行、风、夏天、走向海
+- Layout: `small-window-block`
+- Anchor: `washed-paper-block`
+- Typography: `archive-microtext`
+- Texture: `washed-photo-print`
+- Accent: `tomato-red`, `sky-blue`, or `soft-green`
+- Best for: 夏天的配置、番茄、苹果、果味汽水
+- Notes: Pair one fruit with a tiny sky/field/paper rectangle; the block must stay small.
 
-### Type And Object
+## Mood
+
+### Blue Dot Field
+
+- Layout: `blue-dot-field`
+- Anchor: `blue-dot-constellation`
+- Typography: `almost-textless`
+- Texture: `soft-scan-noise`
+- Accent: `electric-blue` or `cobalt-blue`
+- Best for: 留白、呼吸、慢一点、无所谓、发呆、空、孤独
+- Notes: The blue dots are the emotional event. Use very few words.
+
+### Sparse Star Mood
+
+- Layout: `star-orbit`
+- Anchor: `scattered-star-sign`
+- Typography: `broken-english-fragments`
+- Texture: `low-contrast-photocopy`
+- Accent: `electric-blue`, `cobalt-blue`, or `charcoal-black`
+- Best for: 看星星、夜晚、失眠、梦、微光、极夜
+- Notes: Keep stars small and irregular. Avoid cute star stickers.
+
+### Ghost Text Window
 
 - Layout: `type-and-object`
-- Anchor: `irregular-color-scrap`
-- Typography: `small-title-plus-index`
-- Texture: `risograph-grain`
-- Mood: `quiet`
-- Best for: 抽象短句、标题感主题、没有明显物体的情绪
+- Anchor: `abstract-texture-window`
+- Typography: `gray-ghost-text`
+- Texture: `xerox-softness`
+- Accent: `pale-cyan`, `charcoal-black`, or one tiny `tomato-red` mark
+- Best for: 压力、允许脆弱、疗愈、心态、从容、等待
+- Notes: Use faint text as texture. The poster can be nearly empty.
 
-### Thin Diagram
+## People
+
+### Quiet Silhouette
+
+- Layout: `quiet-silhouette`
+- Anchor: `quiet-person-silhouette`
+- Typography: `archive-microtext`
+- Texture: `aged-paper-fibers`
+- Accent: `cobalt-blue`, `tomato-red`, or `charcoal-black`
+- Best for: 自我、童年、女人、自由、别怕变老、愿她自由
+- Notes: Use a tiny back view, shadow, or silhouette. Do not make a realistic portrait.
+
+### Gesture Fragment
+
+- Layout: `upper-right-note`
+- Anchor: `partial-gesture-crop`
+- Typography: `edge-phrase`
+- Texture: `washed-photo-print`
+- Accent: `sky-blue`, `guava-pink`, or `soft-green`
+- Best for: 目光、关系、对话、取悦、倾听、脆弱
+- Notes: A cropped hand, eye-line, or shoulder can stand for the person.
+
+### Person As Trace
+
+- Layout: `paper-fragment-stack`
+- Anchor: `shadow-or-trace`
+- Typography: `date-weather-label`
+- Texture: `subtle-halftone`
+- Accent: `charcoal-black`, `pale-cyan`, or one tiny `tomato-red` mark
+- Best for: 自我救赎、放不下才沉重、候鸟、迷雾、爱的海洋
+- Notes: Use absence: shadow, footprint, empty chair, window, or torn photo.
+
+## Still Object
+
+### Thin Branch Diagram
 
 - Layout: `thin-diagram`
-- Anchor: `thin-annotation-diagram`
+- Anchor: `thin-branch-diagram`
+- Typography: `broken-english-fragments`
+- Texture: `faint-pencil-annotation`
+- Accent: `sky-blue`, `soft-green`, or `charcoal-black`
+- Best for: 树、枯枝、小花、杜鹃、春、天晴
+- Notes: The branch or flower should be graphic, thin, and scanned.
+
+### Tiny Object Label
+
+- Layout: `center-specimen`
+- Anchor: `daily-object-specimen`
 - Typography: `specimen-label`
 - Texture: `light-ink-bleed`
-- Mood: `memory`
-- Best for: 需要设计感、说明书感、手帐素材感的主题
+- Accent: `electric-blue`, `tomato-red`, `pale-yellow`, or `charcoal-black`
+- Best for: 风筝、时钟、瓷器、灯笼、海螺、咖啡、锥桶
+- Notes: One object only. Treat it like a small museum label on paper.
+
+### Small Photo Window
+
+- Layout: `small-window-block`
+- Anchor: `small-landscape-window`
+- Typography: `archive-microtext`
+- Texture: `washed-photo-print`
+- Accent: `sky-blue`, `cobalt-blue`, or `soft-green`
+- Best for: 海边、天空、云、日出、麦田、杭州·雪、看海
+- Notes: Use a tiny rectangular landscape fragment, not a full-bleed scene.
 
 ## Batch Defaults
 
-For a 9-image batch:
+For a mixed 9-image batch:
 
-1. Use `Fruit Diary` for 2-3 fruit or food themes.
-2. Use `Night Micro Poster` for 1-2 night or quiet themes.
-3. Use `Photo Fragment` only when a photo exists.
-4. Use `Contact Sheet` for one collection or travel theme.
-5. Use `Inner Growth` for one inward or reflective theme.
-6. Use `Seaside Note`, `Type And Object`, or `Thin Diagram` to fill the rest.
-
-Keep paper tone stable across the batch. Rotate accent colors, but do not use more than 5 accent hues in one 9-image set.
+1. Classify every row as Fruit, Mood, People, or Still Object.
+2. Use no more than 3 paper tones across the batch.
+3. Use no more than 5 accent hues across the batch.
+4. Rotate layouts so adjacent images do not share the same composition.
+5. Keep type scale, paper texture, and negative-space discipline consistent.
+6. Prefer `electric-blue`, `tomato-red`, `sky-blue`, `pale-yellow`, and `soft-green` as the recurring accent system.
 
 ## Prompt Skeleton
 
 ```text
-Tall vertical [ratio] phone poster on [paper tone] matte paper, with [empty-space]% quiet empty space. A small [layout position] cluster occupies about [cluster-size]% of the canvas, leaving [space description].
+Tall vertical 3:5 minimal zine emotion poster on [paper tone] aged matte paper, with [empty-space]% quiet empty space. A small [layout position] cluster occupies about [cluster-size]% of the canvas, leaving the paper surface dominant.
 
-The subject is [theme] translated into [anchor metaphor]. Use [anchor treatment] so it feels like [paper/photo/stationery material].
+The theme "[theme]" is translated into [category-specific anchor]. Use [anchor treatment] so it feels like a tiny scanned specimen, paper clipping, low-fidelity print, or abstract sign rather than a full scene.
 
-Use [typography style] text reading "[copy]", placed [text position]. Add one [accent color] accent as [accent form], with [texture details].
+Use tiny [typography style] text reading "[copy]", placed [text position], with optional microtext such as [date/weather/index/broken words]. Add one [accent color] accent as [accent form], visible at thumbnail size but restrained on the page, with [texture details].
 
-Flat orthographic scanned-paper mood, [mood words]. Avoid full-bleed scene, commercial headline, logo, CTA, glossy mockup, hard shadow, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, and stock-photo realism.
+Flat orthographic scanned-paper mood, quiet, private, poetic, airy, low-fidelity editorial print. Avoid full-bleed scene, commercial headline, logo, CTA, glossy mockup, hard shadow, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, motivational quote card, and stock-photo realism.
 ```

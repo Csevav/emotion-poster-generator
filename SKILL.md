@@ -1,15 +1,15 @@
 ---
 name: emotion-poster-generator
-description: Generate one or many quiet emotion posters and stationery-cover images from themes, photos, short copy, diary notes, objects, moods, lists, tables, or batch briefs. Use when the user wants sparse vertical paper posters with large negative space, small visual anchors, delicate typography, handmade stationery texture, and restrained color accents.
+description: Generate one or many quiet minimal zine emotion posters from themes, photos, short copy, diary notes, fruits, moods, people, still objects, lists, tables, or batch briefs. Use when the user wants sparse vertical paper posters with huge negative space, one small symbolic anchor, micro typography, scanned-paper texture, and one restrained high-recognition accent color.
 ---
 
 # Emotion Poster Generator
 
 Turn the user's prompt into generated raster images plus traceable prompts.
 
-This skill supports both single-image and batch production. Choose the mode from the user's prompt rather than asking the user to pick a separate skill.
+This skill supports both single-image and batch production. Choose the mode and visual category from the user's prompt rather than asking the user to pick a separate skill.
 
-It abstracts public visual methods common in quiet emotion posters, stationery design, and social cover layouts. Do not copy a specific creator's exact layout, signature, wording, watermark, recurring proprietary marks, or existing images.
+The target image language is a quiet minimal zine emotion poster: tall aged paper, a very small visual event, precise micro typography, and one memorable accent color. Preserve the essence of sparse emotion-poster work without copying any creator's exact layout, title format, signature, watermark, recurring proprietary marks, or existing image.
 
 ## Mode Routing
 
@@ -28,6 +28,59 @@ Priority rules:
 - Multiple photos, or a photo folder plus multiple briefs, means Batch Mode or Series Mode.
 - A long paragraph should become Text Mode unless it contains multiple separate poster items.
 - If the prompt is ambiguous and the choice would materially change cost or output count, ask one concise clarification.
+
+## Category Routing
+
+After choosing the mode, classify each output into one visual category.
+
+- Fruit: apple, pear, orange, tomato, guava, lemon, watermelon, strawberry, cherry, fruit soda, food-as-fruit.
+- Mood: empty space, pressure, healing, waiting, slow down, solitude, vulnerability, calmness, memory, breathing, staring blankly, freedom, light, rain, night.
+- People: self, child, woman, old age, gaze, relationship, dialogue, care, freedom, vulnerability, body, gesture, portrait prompt.
+- Still Object: kite, clock, ceramic, lantern, shell, coffee, branch, flower, tree, paper, chair, cone, fan, window, book, daily object.
+
+Category rules:
+
+- If a prompt names a concrete fruit, use Fruit even when the copy is emotional.
+- If a prompt names a person or portrait, use People, but avoid literal face-forward portrait unless the user explicitly asks for one.
+- If a prompt names a physical non-fruit object, use Still Object.
+- If the prompt is abstract or mainly emotional, use Mood.
+- For batch work, record the category per row so the visual grammar varies intentionally.
+
+## Category Grammars
+
+Use these category-specific visual grammars before selecting the final recipe.
+
+### Fruit
+
+- Treat fruit as a specimen, cutaway, translucent slice, torn paper print, or small color study.
+- Put the fruit cluster at center or slightly lower than center; keep it small enough that the paper reads first.
+- Use one high-recognition fruit color: tomato red, apple red, pale yellow, guava pink, citrus yellow, warm orange, or soft green.
+- Add micro labels, tiny date/weather text, faint ingredient-like notes, or barely readable editorial fragments.
+- Avoid cute fruit stickers, grocery ads, juicy commercial food photography, plates, tables, hands, and full still-life scenes.
+
+### Mood
+
+- Convert the mood into an abstract but imageable sign: blue dots, scattered stars, a thin line, a small shadow, a gray block, a misty paper window, a tiny distant landscape, or a sparse diagram.
+- The subject may be almost nothing; the emotional charge should come from position, empty space, paper tone, and micro type.
+- Electric blue, cobalt blue, pale cyan, gray-black, or one tiny red mark work well.
+- Use short poetic text, broken words, small annotations, serial numbers, or low-contrast ghost text.
+- Avoid literal emoji, therapy poster language, motivational quote layouts, large calligraphy, or decorative blobs.
+
+### People
+
+- Do not default to a realistic portrait. Translate people into a silhouette, cropped gesture, shadow, tiny back view, paper cutout, photo fragment, eye-line, or object that stands for a person.
+- Keep faces small, partial, obscured, or absent unless the user explicitly asks for an identifiable person.
+- Use documentary microtext, date/place notes, one quiet line of copy, and a small color accent attached to the person-symbol.
+- Good anchors: a small coat silhouette, a hand crop, a pair of eyes as paper texture, a tiny walking figure, a torn ID-photo fragment, a chair, a window, or a shadow.
+- Avoid fashion editorial, realistic headshots, beauty portraits, cinematic people scenes, social-media quote cards, and sentimental illustration.
+
+### Still Object
+
+- Treat the object as a scanned specimen or tiny museum label object on paper.
+- Use one object only, or one object plus one small paper/photo fragment.
+- Favor thin branch diagrams, old fan, clock, ceramic, shell, kite, flower, paper scrap, cup, book, lantern, window, or everyday tool.
+- Pair the object with micro annotations, small English fragments, date/weather, a tiny index number, or measurement-like type.
+- Avoid product ads, realistic tabletop photography, cozy lifestyle scenes, dense collage, large shadows, and obvious mockups.
 
 ## Input Contract
 
@@ -61,33 +114,34 @@ Write each final image prompt as four compact paragraphs describing visible pixe
 
 Paragraph 1: canvas and composition
 
-- Tall vertical poster, default 4:5 unless the user asks otherwise.
-- Warm white, off-white, pale gray, or lightly aged matte paper.
-- 65%-90% quiet empty paper.
-- One small visual cluster, roughly 10%-28% of the canvas.
-- Cluster position: center, upper-middle, lower-middle, lower-left, or upper-right.
-- No border, realistic frame, app UI, or mockup.
+- Tall vertical paper poster, default 3:5. Use 4:5 only when the user or target platform requires it.
+- Warm white, off-white, pale gray, gray-beige, or lightly aged matte paper.
+- 70%-90% quiet empty paper.
+- One small visual cluster, roughly 8%-24% of the canvas.
+- Cluster position: center, slightly above center, slightly below center, lower-left, upper-right, or a quiet off-center point.
+- No border, realistic frame, app UI, or product mockup.
 
 Paragraph 2: subject and image anchor
 
-- Convert the theme into one imageable anchor.
-- Good anchors: fruit, plant, star, window, paper scrap, daily object, small photo crop, landscape fragment, hand-drawn specimen, or abstract emotional symbol.
+- Convert the theme into one imageable anchor based on its category grammar.
+- The anchor must be readable at thumbnail size but still physically small on the page.
+- Good anchors: fruit cutaway, plant branch, star field, blue-dot constellation, small photo crop, torn paper block, thin diagram, daily object, tiny silhouette, shadow, window, landscape scrap, or abstract emotional symbol.
 - If a photo is supplied, treat it as a small paper clipping, contact sheet, washed photo panel, or cropped fragment inside the layout.
 - Prefer one clear metaphor over a complete illustrated scene.
 
 Paragraph 3: typography, accent, and print behavior
 
-- Use small serif, monospaced, typewriter, or delicate editorial caption text.
-- Use one short readable phrase in Chinese or English.
-- Optional microtext: date, weather, place, material label, index number, or tiny archive note.
-- Use one restrained but visible accent color.
-- Add paper fibers, scan noise, faint pencil marks, risograph grain, light ink bleed, xerox softness, or halftone degradation.
+- Use tiny serif, monospaced, typewriter, or delicate editorial caption text.
+- Use one short readable phrase in Chinese or English, plus optional microtext that can be partly unreadable.
+- Optional microtext: date, weather, place, material label, index number, tiny archive note, measurement, or short broken English words.
+- Use one restrained but visible accent color; it should carry the poster's memory at thumbnail size.
+- Add paper fibers, scan noise, faint pencil marks, risograph grain, light ink bleed, xerox softness, washed print, or halftone degradation.
 
 Paragraph 4: mood and negative constraints
 
 - Flat orthographic scanned-paper mood.
-- Quiet, diary-like, gentle, private, poetic, slow, handmade, airy, slightly nostalgic.
-- Avoid full-bleed scenes, commercial ads, large headlines, logos, CTA, glossy mockups, hard shadows, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, and stock-photo realism.
+- Quiet, private, poetic, slow, airy, restrained, slightly nostalgic, editorial, low-fidelity print.
+- Avoid full-bleed scenes, commercial ads, large headlines, logos, CTA, glossy mockups, hard shadows, cinematic lighting, 3D, neon, anime, cute stickers, dense collage, stock-photo realism, motivational quote posters, and generic AI poster polish.
 
 ## Recipe Axes
 
@@ -98,31 +152,41 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `center-specimen`: one tiny object or photo fragment centered in large empty paper
 - `lower-left-diary`: small cluster low and left, with quiet empty upper space
 - `upper-right-note`: tiny paper/photo block upper-right with loose microtext
-- `six-card-contact-sheet`: 4-6 small panels arranged as a tiny contact sheet
+- `micro-contact-sheet`: 3-6 very small panels arranged as a compact contact sheet
 - `paper-fragment-stack`: two or three overlapping scraps
 - `type-and-object`: short phrase and one small object form the cluster
+- `blue-dot-field`: saturated blue dots placed sparsely across quiet paper
 - `star-orbit`: stars, dots, or scattered letters loosely orbit a small anchor
-- `fruit-study`: fruit or botanical element as a stationery specimen
+- `fruit-cutaway-study`: fruit slice or cutaway as a tiny specimen
 - `thin-diagram`: fine annotation lines around one object
+- `small-window-block`: one small rectangular photo/color block with micro labels
+- `quiet-silhouette`: tiny person, shadow, gesture, or partial figure in empty paper
 
 ### Anchor
 
-- `tiny-faded-photo`
-- `paper-clipping`
-- `botanical-specimen`
 - `fruit-specimen`
-- `hand-drawn-line-object`
-- `small-monochrome-landscape`
-- `irregular-color-scrap`
-- `thin-annotation-diagram`
+- `translucent-fruit-slice`
+- `blue-dot-constellation`
+- `scattered-star-sign`
+- `thin-branch-diagram`
+- `tiny-faded-photo`
+- `washed-paper-block`
+- `paper-clipping`
+- `small-landscape-window`
+- `daily-object-specimen`
+- `quiet-person-silhouette`
+- `partial-gesture-crop`
+- `shadow-or-trace`
 - `abstract-texture-window`
-- `mini-contact-sheet`
+- `micro-contact-sheet`
 
 ### Typography
 
 - `tiny-caption`
 - `edge-phrase`
 - `archive-microtext`
+- `broken-english-fragments`
+- `date-weather-label`
 - `scattered-letters`
 - `vertical-note`
 - `gray-ghost-text`
@@ -132,7 +196,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 
 ### Texture
 
-- `paper-fibers`
+- `aged-paper-fibers`
 - `soft-scan-noise`
 - `xerox-softness`
 - `risograph-grain`
@@ -140,6 +204,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `faint-pencil-annotation`
 - `washed-photo-print`
 - `subtle-halftone`
+- `low-contrast-photocopy`
 
 ### Mood
 
@@ -157,38 +222,45 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
 - `small-joy`
 - `rainy`
 - `sleepy`
+- `breathing`
+- `vulnerable`
+- `slow`
+- `blank`
 
 ### Accent
 
+- `electric-blue`
 - `cobalt-blue`
-- `ultramarine`
-- `leaf-green`
-- `lemon-yellow`
-- `tomato-red`
-- `cherry-red`
+- `sky-blue`
 - `pale-cyan`
+- `tomato-red`
+- `apple-red`
+- `guava-pink`
+- `citrus-yellow`
+- `pale-yellow`
+- `soft-green`
 - `warm-orange`
-- `lavender`
-- `fruit-pink`
+- `charcoal-black`
 
 ## Workflow
 
 1. Parse the user's content.
-   - Identify central subject, mood, exact text if supplied, visual metaphor, and whether reference images are used.
+   - Identify mode, category, central subject, mood, exact text if supplied, visual metaphor, and whether reference images are used.
    - For a complex idea, reduce it to one imageable metaphor.
    - If no image text is supplied, invent one short poetic phrase in the user's language.
 
 2. Select a variation recipe.
+   - Pick a category-specific recipe from `prompt-recipes.md` when useful.
    - Pick layout, anchor, typography, texture, mood, and accent.
    - For batches, avoid repeating the same layout unless the user asks for strict series consistency.
    - If the composition becomes dense, remove objects before reducing empty space.
-   - Optional: use `prompt-recipes.md` for quick recipe selection.
 
 3. Compile one final image prompt per output.
    - Use the four-paragraph Prompt Compiler.
    - Specify the exact in-image phrase only when useful.
-   - Keep text short because image models often distort long text.
+   - Keep main readable text short because image models often distort long text.
    - State anchor location, approximate size, accent color, and paper treatment.
+   - Explicitly say the image is flat and scanned, not a scene, mockup, or ad.
 
 4. Generate images.
    - Use built-in image generation by default.
@@ -197,7 +269,7 @@ Pick one value from each axis for every image. For batch work, vary the recipe a
    - Do not stop after prompt-only unless the user explicitly asks for prompt-only.
 
 5. Record the run.
-   - For one image, return image, final prompt, recipe, and a short interpretation note.
+   - For one image, return image, final prompt, category, recipe, and a short interpretation note.
    - For batch work, maintain an index with one section per output.
 
 ## Series Rules
@@ -209,6 +281,7 @@ For a series, keep these consistent:
 - general text scale
 - overall negative-space discipline
 - image treatment family
+- one visual category per row, recorded in the output index
 
 Vary these across images:
 
@@ -224,14 +297,16 @@ For a coherent 9-image batch, use no more than 3 paper tones and no more than 5 
 
 Before returning, check every generated image:
 
-- Is it vertical and paper-like?
-- Is 65%-90% of the image empty paper?
+- Is it a tall vertical paper poster, preferably 3:5?
+- Is 70%-90% of the image empty paper?
 - Is there only one main visual anchor?
-- Is the cluster small enough for a quiet cover?
-- Is typography delicate rather than commercial?
-- Is the accent color visible but not loud?
-- Does the image avoid copying a specific creator's signature, watermark, title format, or existing image?
-- Does it avoid full-bleed illustration, dense scrapbook, glossy ad, 3D, neon, anime, and stock-photo realism?
+- Is the anchor small but still recognizable at thumbnail size?
+- Does the category grammar match the theme?
+- Is typography micro, delicate, and editorial rather than a large headline?
+- Is there one restrained high-recognition accent color?
+- Does the image feel scanned, printed, aged, or low-fidelity instead of digitally clean?
+- Does it avoid copying a specific creator's signature, watermark, title format, or existing image?
+- Does it avoid full-bleed illustration, dense scrapbook, glossy ad, 3D, neon, anime, cute stickers, motivational quote cards, commercial cover design, and stock-photo realism?
 
 If an output fails, regenerate once with stronger constraints.
 
@@ -253,6 +328,7 @@ For one image:
 **说明**
 
 - Mode: [Single / Photo / Text]
+- Category: [Fruit / Mood / People / Still Object]
 - Recipe: [layout / anchor / typography / accent / texture / mood]
 - [one short note about how the user's input was interpreted]
 ````
@@ -262,9 +338,9 @@ For batch output, return a compact index first, then image sections:
 ````markdown
 # Batch Run: [run name]
 
-| ID | Theme | Output | Recipe | Review |
-| --- | --- | --- | --- | --- |
-| 001 | 橘子汽水 | 001-orange-soda.png | lower-left-diary / fruit-specimen / tiny-caption / warm-orange / paper-fibers / summer | pass |
+| ID | Category | Theme | Output | Recipe | Review |
+| --- | --- | --- | --- | --- | --- |
+| 001 | Fruit | 橘子汽水 | 001-orange-soda.png | fruit-cutaway-study / translucent-fruit-slice / tiny-caption / warm-orange / aged-paper-fibers / summer | pass |
 
 ## 001 - 橘子汽水
 
@@ -279,5 +355,5 @@ For batch output, return a compact index first, then image sections:
 
 - "用这个 skill 做一张关于周末的图"
 - "主题：橘子汽水，文案：夏天慢慢醒来"
-- "把这张照片做成安静手帐海报"
+- "把这张照片做成安静情绪海报"
 - "批量生成 9 张，主题分别是：周末、看星星、失眠、橘子、风筝、梨、夏天、向内生长、海边"
